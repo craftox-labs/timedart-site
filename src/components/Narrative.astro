@@ -1,0 +1,48 @@
+---
+import { narrative } from "../config/site";
+---
+
+<section class="section">
+  <div class="wrap">
+    <div class="narrative">
+      <div class="eyebrow narrative-eyebrow">{narrative.eyebrow}</div>
+      <p class="quote">
+        {narrative.quotePre}<em>{narrative.quoteEm}</em>{narrative.quotePost}
+      </p>
+      <p class="body">{narrative.body}</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .narrative {
+    text-align: center;
+    max-width: var(--narrative-max-width);
+    margin: 0 auto;
+  }
+
+  .narrative-eyebrow {
+    margin-bottom: var(--space-26);
+  }
+
+  .quote {
+    font-size: var(--text-3xl);
+    color: var(--color-heading);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--tracking-tight-sm);
+    line-height: var(--leading-relaxed);
+    margin: 0 auto;
+    max-width: var(--narrative-quote-max-width);
+  }
+
+  .quote em {
+    color: var(--color-accent-text);
+    font-style: normal;
+  }
+
+  .body {
+    color: var(--color-muted);
+    font-size: var(--text-2xl);
+    margin-top: var(--space-22);
+  }
+</style>

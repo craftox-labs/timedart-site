@@ -1,0 +1,206 @@
+---
+import { nav, links, site } from "../config/site";
+---
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="#top" aria-label={`${site.title} home`}>
+      <img src="/logo/timedart_logo_horizontal.svg" alt={site.title} />
+    </a>
+    <nav class="nav-links">
+      {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+    </nav>
+    <div class="nav-right">
+      <button class="icon-btn" id="themeToggle" aria-label="Toggle colour theme" title="Toggle theme">
+        <svg class="theme-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="theme-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path>
+        </svg>
+      </button>
+      <a class="btn btn-soft" href={links.github}>GitHub</a>
+      <a class="btn btn-primary" href={links.demo}>Live demo</a>
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <path d="M3 6h18M3 12h18M3 18h18"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="drawer">
+  <div class="drawer-top">
+    <span class="mono brand-mark">{site.title}</span>
+    <button class="icon-btn" id="drawerClose" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+        <path d="M18 6 6 18M6 6l12 12"></path>
+      </svg>
+    </button>
+  </div>
+  {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+  <a href={links.github}>GitHub ↗</a>
+  <a href={links.demo} class="drawer-accent">Try the live demo ↗</a>
+</div>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--color-bg) var(--header-bg-opacity), transparent);
+    backdrop-filter: blur(var(--backdrop-blur));
+    -webkit-backdrop-filter: blur(var(--backdrop-blur));
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: var(--space-26);
+    height: var(--header-height);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--space-10);
+    height: var(--brand-height);
+  }
+
+  .brand img {
+    height: var(--brand-logo-height);
+    width: auto;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: var(--space-26);
+    margin-left: var(--space-14);
+  }
+
+  .nav-links a {
+    color: var(--color-text);
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-medium);
+    white-space: nowrap;
+  }
+
+  .nav-links a:hover {
+    color: var(--color-accent-text);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: var(--space-12);
+    margin-left: auto;
+  }
+
+  .icon-btn {
+    width: var(--icon-btn-size);
+    height: var(--icon-btn-size);
+    border-radius: var(--radius-lg);
+    border: var(--border-width) solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-heading);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: border-color var(--transition-base), color var(--transition-base);
+  }
+
+  .icon-btn:hover {
+    border-color: var(--color-border-strong);
+    color: var(--color-accent-text);
+  }
+
+  .icon-btn svg {
+    width: var(--icon-size);
+    height: var(--icon-size);
+  }
+
+  .theme-sun {
+    display: none;
+  }
+
+  :global([data-theme="light"]) .theme-moon {
+    display: none;
+  }
+
+  :global([data-theme="light"]) .theme-sun {
+    display: block;
+  }
+
+  .menu-btn {
+    display: none;
+  }
+
+  .brand-mark {
+    color: var(--color-accent-text);
+  }
+
+  #drawer {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: var(--color-bg);
+    padding: var(--space-24);
+    display: none;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  #drawer.open {
+    display: flex;
+  }
+
+  .drawer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: var(--icon-btn-size);
+    margin-bottom: var(--space-20);
+  }
+
+  #drawer a {
+    color: var(--color-heading);
+    font-size: var(--text-xl);
+    font-weight: var(--font-weight-semibold);
+    padding: var(--space-14) var(--space-4);
+    border-bottom: var(--border-width) solid var(--color-border);
+  }
+
+  .drawer-accent {
+    color: var(--color-accent-text);
+  }
+
+  @media (max-width: 900px) {
+    .nav-links {
+      display: none;
+    }
+
+    .menu-btn {
+      display: grid;
+    }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const themeToggle = document.getElementById("themeToggle");
+  themeToggle?.addEventListener("click", () => {
+    const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try {
+      localStorage.setItem("timedart-theme", next);
+    } catch (e) {}
+  });
+
+  const drawer = document.getElementById("drawer");
+  document.getElementById("menuBtn")?.addEventListener("click", () => drawer?.classList.add("open"));
+  document.getElementById("drawerClose")?.addEventListener("click", () => drawer?.classList.remove("open"));
+  drawer?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => drawer.classList.remove("open")));
+</script>
