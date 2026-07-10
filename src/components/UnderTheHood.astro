@@ -2,82 +2,91 @@
 import { underTheHood, underTheHoodSection } from "../config/site";
 ---
 
-<section class="section" id="hood" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">{underTheHoodSection.eyebrow}</div>
-      <h2>{underTheHoodSection.heading}</h2>
-      <p>{underTheHoodSection.lede}</p>
-    </div>
+<section class="hd section" id="hood">
+    <div class="wrap">
+        <div class="section-head">
+            <div class="eyebrow">{underTheHoodSection.eyebrow}</div>
+            <h2>{underTheHoodSection.heading}</h2>
+            <p>{underTheHoodSection.lede}</p>
+        </div>
 
-    <div class="hood">
-      <div class="hood-grid">
-        {
-          underTheHood.map((cell) => (
-            <div class="hood-cell">
-              <div class="mono">{cell.label}</div>
-              <h4>{cell.title}</h4>
-              <p>{cell.description}</p>
+        <div class="hood surface-dark">
+            <div class="hood-grid">
+                {
+                    underTheHood.map((cell) => (
+                        <div class="hood-cell">
+                            <div class="mono">{cell.label}</div>
+                            <h4>{cell.title}</h4>
+                            <p>{cell.description}</p>
+                        </div>
+                    ))
+                }
             </div>
-          ))
-        }
-      </div>
+        </div>
     </div>
-  </div>
 </section>
 
 <style>
-  .hood {
-    border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-4xl);
-    background: var(--color-surface);
-    overflow: hidden;
-  }
-
-  .hood-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .hood-cell {
-    padding: var(--space-34) var(--space-28);
-    border-right: var(--border-width) solid var(--color-border);
-    border-bottom: var(--border-width) solid var(--color-border);
-  }
-
-  .hood-cell:last-child {
-    border-right: none;
-  }
-
-  .hood-cell .mono {
-    color: var(--color-accent-text);
-    font-size: var(--text-xs-plus);
-    letter-spacing: var(--tracking-wide);
-  }
-
-  .hood-cell h4 {
-    font-size: var(--text-lg-plus);
-    margin: var(--space-10) 0 var(--space-8);
-  }
-
-  .hood-cell p {
-    color: var(--color-muted);
-    font-size: var(--text-base-minus);
-  }
-
-  @media (max-width: 900px) {
-    .hood-grid {
-      grid-template-columns: 1fr 1fr;
+    .hd {
+        background: var(--color-bg-2);
+        border-top: var(--border-width) solid var(--color-border);
+        border-bottom: var(--border-width) solid var(--color-border);
     }
-  }
 
-  @media (max-width: 640px) {
+    .hood {
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-bg);
+        overflow: hidden;
+    }
+
     .hood-grid {
-      grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
     }
 
     .hood-cell {
-      border-right: none;
+        padding: var(--space-28) var(--space-28);
+        border-right: var(--border-width) solid var(--color-border);
+        border-bottom: var(--border-width) solid var(--color-border);
     }
-  }
+
+    .hood-cell:last-child {
+        border-right: none;
+    }
+
+    .hood-cell .mono {
+        font-family: var(--font-sans);
+        font-weight: var(--font-weight-normal);
+        text-transform: uppercase;
+        color: var(--color-accent-text);
+        font-size: var(--text-xs-plus);
+        letter-spacing: var(--tracking-widest-plus);
+    }
+
+    .hood-cell h4 {
+        font-size: var(--text-lg-plus);
+        margin: var(--space-10) 0 var(--space-8);
+    }
+
+    .hood-cell p {
+        color: var(--color-muted);
+        font-size: var(--text-base-minus);
+    }
+
+    @media (max-width: 900px) {
+        .hood-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    @media (max-width: 640px) {
+        .hood-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hood-cell {
+            border-right: none;
+        }
+    }
 </style>

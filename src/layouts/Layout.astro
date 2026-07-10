@@ -1,5 +1,7 @@
 ---
 import "@fontsource-variable/jetbrains-mono";
+import "@fontsource-variable/raleway";
+import "@fontsource-variable/raleway/wght-italic.css";
 import "../styles/global.css";
 import { site } from "../config/site";
 
@@ -34,5 +36,17 @@ const { title } = Astro.props;
   </head>
   <body>
     <slot />
+    <script>
+      // Open off-site links in a new tab. Internal "#" anchors start with
+      // neither http nor a different host, so they're left alone.
+      for (const a of document.querySelectorAll<HTMLAnchorElement>(
+        'a[href^="http"]',
+      )) {
+        if (a.host !== location.host) {
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+        }
+      }
+    </script>
   </body>
 </html>

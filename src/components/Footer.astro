@@ -1,124 +1,133 @@
 ---
 import { footer, site } from "../config/site";
+import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
 ---
 
 <footer class="site-footer">
-  <div class="wrap">
-    <div class="foot-top">
-      <div class="foot-brand">
-        <img src="/logo/timedart_logo_horizontal.svg" alt={site.title} />
-        <p>{footer.brandDescription}</p>
-      </div>
-      <div class="foot-cols">
-        {
-          footer.groups.map((group) => (
-            <div class="foot-col">
-              <h5>{group.heading}</h5>
-              {group.links.map((link) =>
-                link.href ? (
-                  <a href={link.href}>
-                    {link.label}
-                    {link.soon && <span class="soon">soon</span>}
-                  </a>
-                ) : (
-                  <a href="#" aria-disabled="true">
-                    {link.label}
-                    {link.soon && <span class="soon">soon</span>}
-                  </a>
-                )
-              )}
+    <div class="wrap">
+        <div class="foot-top">
+            <div class="foot-brand">
+                <span
+                    class="brand-logo foot-logo"
+                    set:html={logoHorizontal}
+                    role="img"
+                    aria-label={site.title}
+                ></span>
+                <p>{footer.brandDescription}</p>
             </div>
-          ))
-        }
-      </div>
+            <div class="foot-cols">
+                {
+                    footer.groups.map((group) => (
+                        <div class="foot-col">
+                            <h5>{group.heading}</h5>
+                            {group.links.map((link) =>
+                                link.href ? (
+                                    <a href={link.href}>
+                                        {link.label}
+                                        {link.soon && (
+                                            <span class="soon">soon</span>
+                                        )}
+                                    </a>
+                                ) : (
+                                    <a href="#" aria-disabled="true">
+                                        {link.label}
+                                        {link.soon && (
+                                            <span class="soon">soon</span>
+                                        )}
+                                    </a>
+                                ),
+                            )}
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span>{footer.bottomLeft}</span>
+            <span>{footer.bottomRight}</span>
+        </div>
     </div>
-    <div class="foot-bottom">
-      <span>{footer.bottomLeft}</span>
-      <span>{footer.bottomRight}</span>
-    </div>
-  </div>
 </footer>
 
 <style>
-  .site-footer {
-    border-top: var(--border-width) solid var(--color-border);
-    background: var(--color-bg-2);
-    padding: var(--space-64) 0 var(--space-40);
-  }
-
-  .foot-top {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-40);
-    flex-wrap: wrap;
-  }
-
-  .foot-brand {
-    max-width: var(--foot-brand-max-width);
-  }
-
-  .foot-brand img {
-    height: var(--brand-logo-height);
-    margin-bottom: var(--space-16);
-  }
-
-  .foot-brand p {
-    color: var(--color-muted);
-    font-size: var(--text-base-minus);
-  }
-
-  .foot-cols {
-    display: flex;
-    gap: var(--space-64);
-    flex-wrap: wrap;
-  }
-
-  .foot-col h5 {
-    font-size: var(--text-xs-plus);
-    text-transform: uppercase;
-    letter-spacing: var(--tracking-widest);
-    color: var(--color-muted);
-    font-weight: var(--font-weight-semibold);
-    margin: 0 0 var(--space-14);
-  }
-
-  .foot-col a {
-    display: block;
-    color: var(--color-text);
-    font-size: var(--text-base);
-    margin-bottom: var(--space-10);
-    font-weight: var(--font-weight-medium);
-  }
-
-  .foot-col a:hover {
-    color: var(--color-accent-text);
-  }
-
-  .foot-bottom {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--space-16);
-    flex-wrap: wrap;
-    align-items: center;
-    margin-top: var(--space-52);
-    padding-top: var(--space-26);
-    border-top: var(--border-width) solid var(--color-border);
-    color: var(--color-muted);
-    font-size: var(--text-sm-plus);
-    font-family: var(--font-mono);
-  }
-
-  .foot-bottom a {
-    color: var(--color-muted);
-  }
-
-  .foot-bottom a:hover {
-    color: var(--color-accent-text);
-  }
-
-  @media (max-width: 900px) {
-    .foot-top {
-      flex-direction: column;
+    .site-footer {
+        border-top: var(--border-width) solid var(--color-border);
+        background: var(--color-bg);
+        padding: var(--space-64) 0 var(--space-40);
     }
-  }
+
+    .foot-top {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-40);
+        flex-wrap: wrap;
+    }
+
+    .foot-brand {
+        max-width: var(--foot-brand-max-width);
+    }
+
+    .foot-logo {
+        margin-bottom: var(--space-16);
+    }
+
+    .foot-brand p {
+        color: var(--color-muted);
+        font-size: var(--text-base-minus);
+    }
+
+    .foot-cols {
+        display: flex;
+        gap: var(--space-64);
+        flex-wrap: wrap;
+    }
+
+    .foot-col h5 {
+        font-size: var(--text-xs-plus);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-widest-plus);
+        color: var(--color-muted);
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 var(--space-14);
+    }
+
+    .foot-col a {
+        display: block;
+        color: var(--color-text);
+        font-size: var(--text-base);
+        margin-bottom: var(--space-10);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .foot-col a:hover {
+        color: var(--color-accent-text);
+    }
+
+    .foot-bottom {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-16);
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: var(--space-52);
+        padding-top: var(--space-26);
+        border-top: var(--border-width) solid var(--color-border);
+        color: var(--color-muted);
+        font-size: var(--text-sm-plus);
+        font-family: var(--font-mono);
+    }
+
+    .foot-bottom a {
+        color: var(--color-muted);
+    }
+
+    .foot-bottom a:hover {
+        color: var(--color-accent-text);
+    }
+
+    @media (max-width: 900px) {
+        .foot-top {
+            flex-direction: column;
+        }
+    }
 </style>

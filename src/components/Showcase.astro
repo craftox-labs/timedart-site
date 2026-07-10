@@ -2,70 +2,64 @@
 import { showcase, showcaseSection } from "../config/site";
 ---
 
-<section class="section" id="screenshots" style="padding-top:0">
-  <div class="wrap">
-    <div class="section-head">
-      <div class="eyebrow">{showcaseSection.eyebrow}</div>
-      <h2>{showcaseSection.heading}</h2>
-      <p>{showcaseSection.lede}</p>
-    </div>
+<section class="section" id="screenshots">
+    <div class="wrap">
+        <div class="section-head">
+            <div class="eyebrow">{showcaseSection.eyebrow}</div>
+            <h2>{showcaseSection.heading}</h2>
+            <p>{showcaseSection.lede}</p>
+        </div>
 
-    <div class="showcase">
-      {
-        showcase.map((item) => (
-          <div class:list={["shot", { "shot-full": item.full }]}>
-            <div class="frame">
-              <div class="frame-bar">
-                <i />
-                <i />
-                <i />
-                <span>{item.label}</span>
-              </div>
-              <img src={item.src} alt={item.alt} loading="lazy" />
-            </div>
-            <div class="cap">
-              <h3>{item.title}</h3>
-              <p>{item.description}</p>
-            </div>
-          </div>
-        ))
-      }
+        <div class="showcase">
+            {
+                showcase.map((item) => (
+                    <div class:list={["shot", { "shot-full": item.full }]}>
+                        <div class="frame surface-dark">
+                            <img src={item.src} alt={item.alt} loading="lazy" />
+                        </div>
+                        <div class="cap">
+                            <h3>{item.title}</h3>
+                            <p>{item.description}</p>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
     </div>
-  </div>
 </section>
 
 <style>
-  .showcase {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-26);
-  }
-
-  .shot .cap {
-    margin-top: var(--space-16);
-  }
-
-  .shot .cap h3 {
-    font-size: var(--text-lg-plus);
-  }
-
-  .shot .cap p {
-    color: var(--color-muted);
-    font-size: var(--text-base);
-    margin-top: var(--space-5);
-  }
-
-  .shot-full {
-    grid-column: span 2;
-  }
-
-  @media (max-width: 640px) {
     .showcase {
-      grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--space-26);
+    }
+
+    .shot .cap {
+        margin-top: var(--space-16);
+    }
+
+    .shot .cap h3 {
+        font-size: var(--text-lg-plus);
+    }
+
+    .shot .cap p {
+        color: var(--color-muted);
+        font-size: var(--text-base);
+        margin-top: var(--space-5);
     }
 
     .shot-full {
-      grid-column: span 1;
+        grid-column: span 2;
     }
-  }
+
+    @media (max-width: 640px) {
+        .showcase {
+            grid-template-columns: 1fr;
+        }
+
+        .shot-full {
+            grid-column: span 1;
+        }
+    }
 </style>

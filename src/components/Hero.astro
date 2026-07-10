@@ -28,11 +28,7 @@ import { hero, links } from "../config/site";
     </div>
 
     <div class="hero-shot">
-      <div class="frame">
-        <div class="frame-bar">
-          <i></i><i></i><i></i>
-          <span>{hero.shot.label}</span>
-        </div>
+      <div class="frame surface-dark">
         <img src={hero.shot.src} alt={hero.shot.alt} loading="eager" />
       </div>
     </div>
@@ -69,7 +65,7 @@ import { hero, links } from "../config/site";
 
   .hero h1 {
     font-size: var(--text-5xl);
-    font-weight: var(--font-weight-black);
+    font-weight: var(--font-heading-weight);
     margin: var(--space-22) 0 0;
     letter-spacing: var(--tracking-tight);
   }

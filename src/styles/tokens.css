@@ -4,193 +4,211 @@
   Change a value here to change it everywhere.
 */
 
+/*
+  The dark palette also applies to any .surface-dark element, so cards can stay
+  dark even under the light theme (to match the app's dark screenshots). Because
+  custom properties cascade, redeclaring them on a card re-themes its subtree.
+*/
 :root,
-[data-theme="dark"] {
-  /* ---------- color: surfaces ---------- */
-  --color-bg: #15191e;
-  --color-bg-2: #12161b;
-  --color-surface: #1a2027;
-  --color-surface-2: #20262d;
-  --color-chrome: #0f1318;
+[data-theme="dark"],
+.surface-dark {
+    /* ---------- color: surfaces ---------- */
+    --color-bg: #111410;
+    --color-bg-2: #111410;
+    /*--color-bg-2: #2e322d;*/
+    --color-surface: #111410;
+    --color-surface-2: #111410;
+    --color-chrome: #111410;
 
-  /* ---------- color: text ---------- */
-  --color-text: #c5c8ba;
-  --color-heading: #e9ecdf;
-  --color-muted: #8b917f;
+    /* ---------- color: text ---------- */
+    --color-text: #c5c8ba;
+    --color-heading: #e9ecdf;
+    --color-muted: #8b917f;
 
-  /* ---------- color: borders ---------- */
-  --color-border: #2a3128;
-  --color-border-strong: #4a5142;
+    /* ---------- color: borders ---------- */
+    --color-border: #2a3128;
+    --color-border-strong: #4a5142;
 
-  /* ---------- color: accent ---------- */
-  --color-accent: #69e228;
-  --color-accent-text: #7ce838;
-  --color-accent-deep: #2e6c0f;
-  --color-accent-dim: #1f480a;
-  --color-on-accent: #0b1004;
+    /* ---------- color: accent ---------- */
+    --color-accent: #69e228;
+    --color-accent-text: #7ce838;
+    --color-accent-deep: #2e6c0f;
+    --color-accent-dim: #1f480a;
+    --color-on-accent: #0b1004;
 
-  /* ---------- color: effects ---------- */
-  --shadow-frame: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
-  --shadow-glow: 0 0 0 1px rgba(105, 226, 40, 0.18), 0 20px 60px -20px rgba(105, 226, 40, 0.22);
+    /* ---------- color: effects ---------- */
+    --shadow-frame: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
+    --shadow-glow:
+        0 0 0 1px rgba(105, 226, 40, 0.18),
+        0 20px 60px -20px rgba(105, 226, 40, 0.22);
 
-  /* ---------- color: dot palette (frame chrome) ---------- */
-  --color-dot-red: #e0603b;
-  --color-dot-yellow: #e0a800;
+    /* ---------- color: dot palette (frame chrome) ---------- */
+    --color-dot-red: #e0603b;
+    --color-dot-yellow: #e0a800;
 }
 
 [data-theme="light"] {
-  --color-bg: #f4f6ee;
-  --color-bg-2: #eef1e6;
-  --color-surface: #ffffff;
-  --color-surface-2: #f3f6ec;
-  --color-chrome: #e7ebde;
+    --color-bg: #f4f6ee;
+    --color-bg-2: #eef1e6;
+    --color-surface: #ffffff;
+    --color-surface-2: #f3f6ec;
+    --color-chrome: #e7ebde;
 
-  --color-text: #33402a;
-  --color-heading: #141c0c;
-  --color-muted: #5f6b52;
+    --color-text: #33402a;
+    --color-heading: #141c0c;
+    --color-muted: #5f6b52;
 
-  --color-border: #dde3d0;
-  --color-border-strong: #c3cbb2;
+    --color-border: #dde3d0;
+    --color-border-strong: #c3cbb2;
 
-  --color-accent: #5cbf1c;
-  --color-accent-text: #2e6c0f;
-  --color-accent-deep: #2e6c0f;
-  --color-accent-dim: #c9ecb0;
-  --color-on-accent: #0b1004;
+    --color-accent: #5cbf1c;
+    --color-accent-text: #2e6c0f;
+    --color-accent-deep: #2e6c0f;
+    --color-accent-dim: #c9ecb0;
+    --color-on-accent: #0b1004;
 
-  --shadow-frame: 0 30px 70px -34px rgba(30, 50, 10, 0.35);
-  --shadow-glow: 0 0 0 1px rgba(92, 191, 28, 0.25), 0 24px 60px -26px rgba(92, 191, 28, 0.28);
+    --shadow-frame: 0 30px 70px -34px rgba(30, 50, 10, 0.35);
+    --shadow-glow:
+        0 0 0 1px rgba(92, 191, 28, 0.25),
+        0 24px 60px -26px rgba(92, 191, 28, 0.28);
 
-  --color-dot-red: #e0603b;
-  --color-dot-yellow: #e0a800;
+    --color-dot-red: #e0603b;
+    --color-dot-yellow: #e0a800;
 }
 
 :root {
-  /* ---------- typography: families ---------- */
-  --font-sans: "Mona Sans", system-ui, -apple-system, sans-serif;
-  --font-mono: "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+    /* ---------- typography: families ---------- */
+    --font-sans: "Mona Sans", system-ui, -apple-system, sans-serif;
+    --font-mono:
+        "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;
+    --font-heading: "Raleway Variable", Georgia, serif;
+    --font-heading-weight: 600; /* Raleway Medium */
+    --font-heading-style: italic;
 
-  /* ---------- typography: weights ---------- */
-  --font-weight-normal: 400;
-  --font-weight-medium: 500;
-  --font-weight-semibold: 600;
-  --font-weight-bold: 700;
-  --font-weight-black: 800;
+    /* ---------- typography: weights ---------- */
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-black: 800;
 
-  /* ---------- typography: type scale ---------- */
-  --text-2xs: 10.5px;
-  --text-xs: 12px;
-  --text-xs-plus: 12.5px;
-  --text-sm: 13px;
-  --text-sm-plus: 13.5px;
-  --text-base-minus: 14.5px;
-  --text-base: 15px;
-  --text-base-plus: 15.5px;
-  --text-md: 16px;
-  --text-md-plus: 17px;
-  --text-lg: 18px;
-  --text-lg-plus: 19px;
-  --text-xl: 20px;
-  --text-2xl: 21px;
-  --text-3xl: clamp(28px, 4vw, 40px);
-  --text-4xl: clamp(30px, 4vw, 42px);
-  --text-5xl: clamp(38px, 6.2vw, 68px);
+    /* ---------- typography: type scale ---------- */
+    --text-2xs: 10.5px;
+    --text-xs: 12px;
+    --text-xs-plus: 12.5px;
+    --text-sm: 13px;
+    --text-sm-plus: 13.5px;
+    --text-base-minus: 14.5px;
+    --text-base: 15px;
+    --text-base-plus: 15.5px;
+    --text-md: 16px;
+    --text-md-plus: 17px;
+    --text-lg: 18px;
+    --text-lg-plus: 19px;
+    --text-xl: 20px;
+    --text-2xl: 21px;
+    --text-3xl: clamp(28px, 4vw, 40px);
+    --text-4xl: clamp(30px, 4vw, 42px);
+    --text-5xl: clamp(38px, 6.2vw, 68px);
 
-  /* ---------- typography: line-height & letter-spacing ---------- */
-  --leading-tight: 1.08;
-  --leading-normal: 1.2;
-  --leading-relaxed: 1.25;
-  --leading-body: 1.6;
-  --tracking-tight: -0.03em;
-  --tracking-tight-sm: -0.02em;
-  --tracking-wide: 0.06em;
-  --tracking-wider: 0.08em;
-  --tracking-widest: 0.12em;
-  --tracking-widest-plus: 0.14em;
+    /* ---------- typography: line-height & letter-spacing ---------- */
+    --leading-tight: 1.08;
+    --leading-normal: 1.2;
+    --leading-relaxed: 1.25;
+    --leading-body: 1.6;
+    --tracking-tight: -0.03em;
+    --tracking-tight-sm: -0.02em;
+    --tracking-wide: 0.06em;
+    --tracking-wider: 0.08em;
+    --tracking-widest: 0.12em;
+    --tracking-widest-plus: 0.14em;
 
-  /* ---------- spacing scale ---------- */
-  --space-1: 1px;
-  --space-2: 2px;
-  --space-4: 4px;
-  --space-5: 5px;
-  --space-6: 6px;
-  --space-7: 7px;
-  --space-8: 8px;
-  --space-9: 9px;
-  --space-10: 10px;
-  --space-12: 12px;
-  --space-14: 14px;
-  --space-15: 15px;
-  --space-16: 16px;
-  --space-18: 18px;
-  --space-20: 20px;
-  --space-22: 22px;
-  --space-24: 24px;
-  --space-26: 26px;
-  --space-28: 28px;
-  --space-30: 30px;
-  --space-34: 34px;
-  --space-36: 36px;
-  --space-40: 40px;
-  --space-44: 44px;
-  --space-52: 52px;
-  --space-56: 56px;
-  --space-64: 64px;
+    /* ---------- spacing scale ---------- */
+    --space-1: 1px;
+    --space-2: 2px;
+    --space-4: 4px;
+    --space-5: 5px;
+    --space-6: 6px;
+    --space-7: 7px;
+    --space-8: 8px;
+    --space-9: 9px;
+    --space-10: 10px;
+    --space-12: 12px;
+    --space-14: 14px;
+    --space-15: 15px;
+    --space-16: 16px;
+    --space-18: 18px;
+    --space-20: 20px;
+    --space-22: 22px;
+    --space-24: 24px;
+    --space-26: 26px;
+    --space-28: 28px;
+    --space-30: 30px;
+    --space-34: 34px;
+    --space-36: 36px;
+    --space-40: 40px;
+    --space-44: 44px;
+    --space-52: 52px;
+    --space-56: 56px;
+    --space-64: 64px;
 
-  /* ---------- radii ---------- */
-  --radius-xs: 5px;
-  --radius-sm: 6px;
-  --radius-md: 7px;
-  --radius-lg: 10px;
-  --radius-xl: 11px;
-  --radius-2xl: 14px;
-  --radius-3xl: 16px;
-  --radius-4xl: 18px;
-  --radius-full: 50%;
+    /* ---------- radii ---------- */
+    --radius-xs: 5px;
+    --radius-sm: 6px;
+    --radius-md: 7px;
+    --radius-lg: 10px;
+    --radius-xl: 11px;
+    --radius-2xl: 14px;
+    --radius-3xl: 16px;
+    --radius-4xl: 18px;
+    --radius-full: 50%;
 
-  /* ---------- layout ---------- */
-  --container-max: 1180px;
-  --container-padding-inline: var(--space-24);
-  --section-padding-block: 110px;
-  --section-padding-block-md: 76px;
-  --section-padding-block-sm: 60px;
-  --section-head-max-width: 640px;
-  --hero-max-width: 820px;
-  --hero-lede-max-width: 620px;
-  --hero-shot-max-width: 1080px;
-  --hero-padding-top: 82px;
-  --hero-padding-top-sm: 52px;
-  --hero-glow-height: 640px;
-  --narrative-max-width: 760px;
-  --narrative-quote-max-width: 720px;
-  --foot-brand-max-width: 320px;
+    /* ---------- layout ---------- */
+    --container-max: 1180px;
+    --container-padding-inline: var(--space-24);
+    --section-padding-block: 110px;
+    --section-padding-block-md: 76px;
+    --section-padding-block-sm: 60px;
+    --section-head-max-width: 640px;
+    --section-lede-max-width: 760px;
+    --hero-max-width: 820px;
+    --hero-lede-max-width: 620px;
+    --hero-shot-max-width: 1080px;
+    --hero-padding-top: 82px;
+    --hero-padding-top-sm: 52px;
+    --hero-glow-height: 640px;
+    --narrative-max-width: 760px;
+    --narrative-quote-max-width: 720px;
+    --foot-brand-max-width: 440px;
 
-  /* ---------- component sizing ---------- */
-  --header-height: 68px;
-  --icon-btn-size: 38px;
-  --icon-size: 18px;
-  --icon-size-sm: 17px;
-  --icon-size-lg: 22px;
-  --brand-height: 30px;
-  --brand-logo-height: 26px;
-  --pillar-icon-size: 44px;
-  --dot-size: 11px;
-  --kbd-min-width: 26px;
-  --key-row-label-width: 132px;
+    /* ---------- component sizing ---------- */
+    --header-height: 68px;
+    --icon-btn-size: 38px;
+    --icon-size: 18px;
+    --icon-size-sm: 17px;
+    --icon-size-lg: 22px;
+    --brand-height: 30px;
+    --brand-logo-height: 26px;
+    --pillar-icon-size: 44px;
+    --flow-badge-size: 32px;
+    --dot-size: 11px;
+    --kbd-min-width: 26px;
+    --key-row-label-width: 132px;
 
-  /* ---------- borders ---------- */
-  --border-width: 1px;
-  --border-width-thick: 2px;
+    /* ---------- borders ---------- */
+    --border-width: 1px;
+    --border-width-thick: 2px;
 
-  /* ---------- transitions ---------- */
-  --transition-fast: 0.12s ease;
-  --transition-base: 0.18s ease;
-  --transition-slow: 0.2s ease;
-  --transition-theme: 0.3s ease;
+    /* ---------- transitions ---------- */
+    --transition-fast: 0.12s ease;
+    --transition-base: 0.18s ease;
+    --transition-slow: 0.2s ease;
+    --transition-theme: 0.3s ease;
 
-  /* ---------- effects ---------- */
-  --backdrop-blur: 14px;
-  --header-bg-opacity: 82%;
-  --scale-active: 0.975;
-  --translate-hover: -3px;
+    /* ---------- effects ---------- */
+    --backdrop-blur: 14px;
+    --header-bg-opacity: 82%;
+    --scale-active: 0.975;
+    --translate-hover: -3px;
 }
