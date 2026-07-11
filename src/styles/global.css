@@ -196,7 +196,6 @@ kbd.accent {
     color: var(--color-accent-text);
     border: var(--border-width) solid
         color-mix(in srgb, var(--color-accent) 30%, transparent);
-    box-shadow: 0 8px 30px -10px rgba(105, 226, 40, 0.45);
 }
 
 .btn-primary:hover {
