@@ -115,27 +115,43 @@ export const howItWorksSection = {
   },
 };
 
-export type FlowStep = { n: string; label: string; description: string };
+// `icon` names a two-tone SVG in src/assets/icons (shared with the app's
+// onboarding hero). `n` is kept for reference / a numbered fallback.
+export type FlowStep = {
+  n: string;
+  icon: "client" | "project" | "task" | "time" | "invoice";
+  label: string;
+  description: string;
+};
 
 export const flowSteps: FlowStep[] = [
   {
     n: "1",
+    icon: "client",
     label: "Client",
     description: "The people you bill - pick one from the side panel.",
   },
-  { n: "2", label: "Project", description: "Work, grouped under the client." },
+  {
+    n: "2",
+    icon: "project",
+    label: "Project",
+    description: "Work, grouped under the client.",
+  },
   {
     n: "3",
+    icon: "task",
     label: "Task",
     description: "What actually gets done, at its own rate.",
   },
   {
     n: "4",
+    icon: "time",
     label: "Timer",
     description: "One keypress to start; the seconds bill themselves.",
   },
   {
     n: "5",
+    icon: "invoice",
     label: "Invoice",
     description: "Tracked hours roll straight into a branded PDF.",
   },
