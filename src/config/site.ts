@@ -26,7 +26,7 @@ export const links = {
 
 // The published release the download buttons point at. Bump this (one line) and
 // redeploy when a new beta is tagged — the asset filenames stay stable.
-export const releaseTag = "v0.9.0-beta.2";
+export const releaseTag = "v0.9.0-beta.3";
 const dlAsset = (file: string) =>
   `${links.github}/releases/download/${releaseTag}/${file}`;
 
@@ -34,7 +34,7 @@ export const downloadSection = {
   eyebrow: "Download",
   heading: "Get timedart",
   lede: "Free, local-first, no account — currently in open beta. Pick your platform.",
-  note: "Beta builds are unsigned, so your OS asks you to confirm the first launch (steps per platform below). Your data never leaves your machine.",
+  note: "Beta builds are unsigned, so your OS asks you to confirm the first launch — the per-platform steps are on each card above. Your data never leaves your machine.",
   allReleasesHref: `${links.github}/releases`,
   platforms: [
     {
@@ -84,7 +84,7 @@ export const hero = {
   headingHighlight: "invoice",
   headingPost: ".",
   lede: "A fast, local-first time tracker for people who bill by the hour. Organise work as clients, projects and tasks - and turn tracked hours into a branded PDF invoice in a couple of clicks.",
-  note: "Runs in your browser - <b>no install, no account</b>. Data never leaves your machine.",
+  note: "Install on Linux · macOS · Windows · Android, or <b>try it first in your browser</b> - no account either way, and your data never leaves your machine.",
   shot: {
     label: "timedart",
     src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/welcome.png",
