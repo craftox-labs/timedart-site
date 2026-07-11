@@ -1,13 +1,13 @@
 // Single source of truth for all copy/content on the marketing site.
-// Edit here — components read this data, they don't hardcode strings.
+// Edit here - components read this data, they don't hardcode strings.
 
 export const site = {
   title: "timedart",
-  tagline: "timedart — local-first time tracking & invoicing",
+  tagline: "timedart - local-first time tracking & invoicing",
   description:
     "Fast, local-first time tracking for people who bill by the hour. Organise work as clients, projects and tasks, and turn tracked hours into a branded, region-aware PDF invoice. Free and open source.",
   ogImage:
-    "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/hero.png",
+    "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/welcome.png",
   themeColor: "#15191e",
   favicon: "/logo/timedart_symbol.svg",
 };
@@ -21,12 +21,13 @@ export const links = {
   githubIssues: "https://github.com/craftox-labs/timedart/issues",
   githubAllProjects: "https://github.com/craftox-labs",
   craftox: "https://craftox-labs.github.io",
-  desktopDownload: null, // coming soon — no link yet
+  desktopDownload: null, // coming soon - no link yet
 };
 
 export const nav = [
+  { label: "Flow", href: "#how-it-works" },
   { label: "Features", href: "#features" },
-  { label: "Screenshots", href: "#screenshots" },
+  { label: "Screens", href: "#screenshots" },
   { label: "Keyboard", href: "#keyboard" },
   { label: "Under the hood", href: "#hood" },
 ];
@@ -36,21 +37,21 @@ export const hero = {
   headingPre: "Track your hours the way you think about your work - then ",
   headingHighlight: "invoice",
   headingPost: ".",
-  lede: "A fast, local-first time tracker for people who bill by the hour. Organise work as clients, projects and tasks — and turn tracked hours into a branded PDF invoice in a couple of clicks.",
-  note: "Runs in your browser — <b>no install, no account</b>. Data never leaves your machine.",
+  lede: "A fast, local-first time tracker for people who bill by the hour. Organise work as clients, projects and tasks - and turn tracked hours into a branded PDF invoice in a couple of clicks.",
+  note: "Runs in your browser - <b>no install, no account</b>. Data never leaves your machine.",
   shot: {
     label: "timedart",
-    src: "/media/welcome.png",
-    alt: "timedart welcome screen — track time against your projects and send branded invoices",
+    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/welcome.png",
+    alt: "timedart welcome screen - track time against your projects and send branded invoices",
   },
 };
 
 export const howItWorksSection = {
   eyebrow: "How it works",
   heading: "One screen. The whole flow.",
-  lede: "Client to invoice without leaving the tracker — everything below is visible at once, no context-switching.",
+  lede: "Client to invoice without leaving the tracker - everything below is visible at once, no context-switching.",
   shot: {
-    label: "timedart — tracker",
+    label: "timedart - tracker",
     src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/hero.png",
     alt: "The timedart tracker, with client, project, timer, tasks and invoice all on one screen",
   },
@@ -62,7 +63,7 @@ export const flowSteps: FlowStep[] = [
   {
     n: "1",
     label: "Client",
-    description: "The people you bill — pick one from the side panel.",
+    description: "The people you bill - pick one from the side panel.",
   },
   { n: "2", label: "Project", description: "Work, grouped under the client." },
   {
@@ -94,7 +95,7 @@ export const pillars: Pillar[] = [
   {
     title: "Yours, on your disk",
     description:
-      "Everything persists locally in SQLite. No account, no cloud, no sync — nothing leaves your machine, and clearing site data is the only reset. Privacy isn't a setting here; it's the architecture.",
+      "Everything persists locally in SQLite. No account, no cloud, no sync - nothing leaves your machine, and clearing site data is the only reset. Privacy isn't a setting here; it's the architecture.",
     tag: "local-first · SQLite",
     wide: true,
     icon: "grid",
@@ -123,7 +124,7 @@ export const pillars: Pillar[] = [
   {
     title: "One app, every screen",
     description:
-      "A roomy two-pane layout on desktop folds into a drawer on narrow windows — the same features throughout.",
+      "A roomy two-pane layout on desktop folds into a drawer on narrow windows - the same features throughout.",
     tag: "Linux · macOS · Windows",
     icon: "device",
   },
@@ -132,7 +133,7 @@ export const pillars: Pillar[] = [
 export const pillarsSection = {
   eyebrow: "Why timedart",
   heading: "Everything you track, ready to bill.",
-  lede: "Five things it does deliberately well — and nothing it doesn't need to.",
+  lede: "Five things it does deliberately well - and nothing it doesn't need to.",
 };
 
 export type ShowcaseItem = {
@@ -152,22 +153,22 @@ export const showcaseSection = {
 
 export const showcase: ShowcaseItem[] = [
   {
-    label: "timedart — invoice preview",
+    label: "timedart - invoice preview",
     src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/invoice.png",
     alt: "Branded, region-aware invoice preview generated from tracked hours",
     title: "Invoices in seconds",
     description:
-      "Hours roll straight into a branded, region-aware PDF — tax labels and bank fields adapt to your country.",
+      "Hours roll straight into a branded, region-aware PDF - tax labels and bank fields adapt to your country.",
     full: true,
   },
-  // Temporarily removed — re-add to restore the half-width "guided first run" tile.
+  // Temporarily removed - re-add to restore the half-width "guided first run" tile.
   // {
   //   label: "onboarding",
   //   src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/onboarding.png",
   //   alt: "Guided first-run onboarding setting up invoice identity",
   //   title: "A guided first run",
   //   description:
-  //     "Learn the flow and set up your invoice identity — name, logo, region, currency — in a skippable wizard.",
+  //     "Learn the flow and set up your invoice identity - name, logo, region, currency - in a skippable wizard.",
   // },
   {
     label: "branding",
@@ -175,7 +176,7 @@ export const showcase: ShowcaseItem[] = [
     alt: "Invoice branding editor with reusable templates and profiles",
     title: "Make it yours",
     description:
-      "Reusable templates and profiles for how invoices look and read — colours, logo, font, payment details.",
+      "Reusable templates and profiles for how invoices look and read - colours, logo, font, payment details.",
     full: true,
   },
 ];
@@ -196,7 +197,7 @@ export const keyboardSection = {
 export const keyRows: KeyRow[] = [
   {
     keys: [{ label: "Space", accent: true }],
-    action: "Start / pause / resume the timer — from any pane",
+    action: "Start / pause / resume the timer - from any pane",
   },
   {
     keys: [{ label: "j" }, { label: "k" }, { label: "↓" }, { label: "↑" }],
@@ -228,7 +229,7 @@ export const keyRows: KeyRow[] = [
 export const narrative = {
   eyebrow: "Built for people who bill by the hour",
   quotePre:
-    "Freelancers, contractors & consultants need to know what they worked on, what it's worth, and ",
+    "Freelancers, contractors & consultants need to know what they worked on, what it's worth, and to ",
   quoteEm: "get paid",
   quotePost: " - without handing their client list to someone else's server.",
   body: "Set a default rate on a client, override it per project or per task, and every entry bills at the right rate automatically. timedart is terse where the work is terse, and stays out of the way the rest of the time.",
@@ -251,7 +252,7 @@ export const underTheHood: HoodCell[] = [
     label: "RUNTIME",
     title: "Flutter",
     description:
-      "One codebase — native desktop that adapts down to a phone. No Electron.",
+      "One codebase - native desktop that adapts down to a phone. No Electron.",
   },
   {
     label: "STORAGE",
@@ -278,16 +279,16 @@ export type FooterGroup = { heading: string; links: FooterLink[] };
 export const footer = {
   brandDescription:
     "Fast, local-first time tracking & invoicing for people who bill by the hour. A product by Craftox.",
-  bottomLeft: "© 2026 Craftox — small, focused software tools.",
+  bottomLeft: "© 2026 Craftox - small, focused software tools.",
   bottomRight: "MIT licensed · built with Flutter & drift",
   groups: [
     {
       heading: "Product",
       links: [
+        { label: "Desktop download", href: links.desktopDownload, soon: true },
         { label: "Live demo", href: links.demo },
         { label: "Features", href: "#features" },
         { label: "Keyboard", href: "#keyboard" },
-        { label: "Desktop download", href: links.desktopDownload, soon: true },
       ],
     },
     {
@@ -296,14 +297,14 @@ export const footer = {
         { label: "GitHub", href: links.github },
         { label: "README", href: links.githubReadme },
         { label: "MIT License", href: links.githubLicense },
-        { label: "Issues", href: links.githubIssues },
+        // { label: "Issues", href: links.githubIssues },
       ],
     },
     {
       heading: "Craftox",
       links: [
         { label: "craftox-labs.github.io", href: links.craftox },
-        { label: "All projects", href: links.githubAllProjects },
+        // { label: "All projects", href: links.githubAllProjects },
       ],
     },
   ] as FooterGroup[],

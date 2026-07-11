@@ -8,7 +8,11 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
 <header class="site-header">
     <div class="wrap nav">
         <a class="brand" href="#top" aria-label={`${site.title} home`}>
-            <span class="brand-logo" set:html={logoHorizontal} aria-hidden="true"></span>
+            <span
+                class="brand-logo"
+                set:html={logoHorizontal}
+                aria-hidden="true"
+            />
         </a>
         <nav class="nav-links">
             {nav.map((item) => <a href={item.href}>{item.label}</a>)}
@@ -47,8 +51,8 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
                     ></path>
                 </svg>
             </button>
-            <a class="btn btn-soft" href={links.github}>GitHub</a>
-            <a class="btn btn-primary" href={links.demo}>Live demo</a>
+            <a class="btn btn-soft nav-links" href={links.github}>GitHub</a>
+            <a class="btn btn-primary nav-links" href={links.demo}>Live demo</a>
             <button
                 class="icon-btn menu-btn"
                 id="menuBtn"
@@ -115,9 +119,10 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
         align-items: center;
         gap: var(--space-10);
         height: var(--brand-height);
-        color: var(--color-heading); /* drives the logo wordmark's currentColor */
+        color: var(
+            --color-heading
+        ); /* drives the logo wordmark's currentColor */
     }
-
 
     .nav-links {
         display: flex;

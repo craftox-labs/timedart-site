@@ -126,7 +126,8 @@ kbd.accent {
 }
 
 [data-theme="light"] kbd.accent {
-    color: var(--color-accent-deep);
+    color: var(--color-accent);
+    border-color: var(--color-accent);
 }
 
 /* ---------- shared layout utilities ---------- */
@@ -150,7 +151,7 @@ kbd.accent {
 }
 
 .section-head {
-    margin-bottom: var(--space-56);
+    margin-bottom: var(--space-36);
 }
 
 /* Heading spans the content width so it doesn't break awkwardly; the lede
@@ -191,8 +192,10 @@ kbd.accent {
 }
 
 .btn-primary {
-    background: var(--color-accent);
-    color: var(--color-on-accent);
+    background: var(--color-accent-dim);
+    color: var(--color-accent-text);
+    border: var(--border-width) solid
+        color-mix(in srgb, var(--color-accent) 30%, transparent);
     box-shadow: 0 8px 30px -10px rgba(105, 226, 40, 0.45);
 }
 
