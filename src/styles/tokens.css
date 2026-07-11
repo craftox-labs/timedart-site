@@ -36,6 +36,13 @@
     --color-accent-dim: #1f480a;
     --color-on-accent: #0b1004;
 
+    /* ---------- color: duo-tone flow icons ---------- */
+    /* Two fills in the onboarding icons. On dark the bright green dominates;
+       the light block flips them (deep dominant, bright accent) — same idea as
+       the logo's "dart" going deep-green on light. */
+    --icon-primary: var(--color-accent);
+    --icon-secondary: var(--color-accent-deep);
+
     /* ---------- color: effects ---------- */
     --shadow-frame: 0 30px 80px -30px rgba(0, 0, 0, 0.7);
     --shadow-glow:
@@ -66,6 +73,10 @@
     --color-accent-deep: #2e6c0f;
     --color-accent-dim: #c9ecb0;
     --color-on-accent: #0b1004;
+
+    /* Flipped: deep green dominates on light, bright green as the accent. */
+    --icon-primary: var(--color-accent-deep);
+    --icon-secondary: var(--color-accent);
 
     --shadow-frame: 0 30px 70px -34px rgba(30, 50, 10, 0.35);
     --shadow-glow:

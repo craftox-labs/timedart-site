@@ -7,15 +7,19 @@ import timeRaw from "../assets/icons/time.svg?raw";
 import invoiceRaw from "../assets/icons/invoice.svg?raw";
 
 // The duo-tone step icons (shared with the app's onboarding). Strip the XML
-// prolog so only the <svg> is inlined; colours are baked, so they read on the
-// dark chip in both themes.
-const strip = (svg: string) => svg.slice(svg.indexOf("<svg"));
+// prolog so only the <svg> is inlined, and swap the two baked greens for theme
+// tokens (--icon-primary / --icon-secondary) so they flip on light mode.
+const themed = (svg: string) =>
+    svg
+        .slice(svg.indexOf("<svg"))
+        .replaceAll("rgb(105,226,40)", "var(--icon-primary)")
+        .replaceAll("rgb(46,108,15)", "var(--icon-secondary)");
 const icons: Record<string, string> = {
-    client: strip(clientRaw),
-    project: strip(projectRaw),
-    task: strip(taskRaw),
-    time: strip(timeRaw),
-    invoice: strip(invoiceRaw),
+    client: themed(clientRaw),
+    project: themed(projectRaw),
+    task: themed(taskRaw),
+    time: themed(timeRaw),
+    invoice: themed(invoiceRaw),
 };
 ---
 
