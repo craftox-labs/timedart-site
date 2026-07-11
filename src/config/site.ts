@@ -206,28 +206,20 @@ export type ShowcaseItem = {
 export const showcaseSection = {
   eyebrow: "A look inside",
   heading: "Native app polish, screen to screen.",
-  lede: "A considered Material 3 theme in timedart green, Mona Sans throughout, one design-token source keeping it consistent.",
+  lede: "A considered Material 3 theme in timedart green, Raleway and Mona Sans throughout, one design-token source keeping it consistent.",
 };
 
 export const showcase: ShowcaseItem[] = [
+  // Temporarily removed - re-add to restore the half-width "guided first run" tile.
   {
-    label: "timedart - invoice preview",
-    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/invoice.png",
-    alt: "Branded, region-aware invoice preview generated from tracked hours",
-    title: "Invoices in seconds",
+    label: "onboarding",
+    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/onboarding.png",
+    alt: "Guided first-run onboarding setting up invoice identity",
+    title: "A guided first run",
     description:
-      "Hours roll straight into a branded, region-aware PDF - tax labels and bank fields adapt to your country.",
+      "Learn the flow and set up your invoice identity - name, logo, region, currency - in a skippable wizard.",
     full: true,
   },
-  // Temporarily removed - re-add to restore the half-width "guided first run" tile.
-  // {
-  //   label: "onboarding",
-  //   src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/onboarding.png",
-  //   alt: "Guided first-run onboarding setting up invoice identity",
-  //   title: "A guided first run",
-  //   description:
-  //     "Learn the flow and set up your invoice identity - name, logo, region, currency - in a skippable wizard.",
-  // },
   {
     label: "branding",
     src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/branding.png",
@@ -235,6 +227,15 @@ export const showcase: ShowcaseItem[] = [
     title: "Make it yours",
     description:
       "Reusable templates and profiles for how invoices look and read - colours, logo, font, payment details.",
+    full: true,
+  },
+  {
+    label: "timedart - invoice preview",
+    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/invoice.png",
+    alt: "Branded, region-aware invoice preview generated from tracked hours",
+    title: "Invoices in seconds",
+    description:
+      "Hours roll straight into a branded, region-aware PDF - tax labels and bank fields adapt to your country.",
     full: true,
   },
 ];
