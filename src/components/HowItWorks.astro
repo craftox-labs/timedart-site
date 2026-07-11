@@ -37,6 +37,9 @@ import { howItWorksSection as s, flowSteps } from "../config/site";
         display: grid;
         grid-template-columns: 1.5fr 1fr;
         gap: var(--space-52);
+        /* Don't stretch the frame to the taller flow column — otherwise its
+           chrome background shows as an empty band below the screenshot. */
+        align-items: start;
     }
 
     .how-shot img {

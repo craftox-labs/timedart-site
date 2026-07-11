@@ -21,7 +21,52 @@ export const links = {
   githubIssues: "https://github.com/craftox-labs/timedart/issues",
   githubAllProjects: "https://github.com/craftox-labs",
   craftox: "https://craftox-labs.github.io",
-  desktopDownload: null, // coming soon - no link yet
+  desktopDownload: "#download", // in-page download section
+};
+
+// The published release the download buttons point at. Bump this (one line) and
+// redeploy when a new beta is tagged — the asset filenames stay stable.
+export const releaseTag = "v0.9.0-beta.2";
+const dlAsset = (file: string) =>
+  `${links.github}/releases/download/${releaseTag}/${file}`;
+
+export const downloadSection = {
+  eyebrow: "Download",
+  heading: "Get timedart",
+  lede: "Free, local-first, no account — currently in open beta. Pick your platform.",
+  note: "Beta builds are unsigned, so your OS asks you to confirm the first launch (steps per platform below). Your data never leaves your machine.",
+  allReleasesHref: `${links.github}/releases`,
+  platforms: [
+    {
+      os: "Linux",
+      downloads: [
+        { label: "AppImage", href: dlAsset("timedart-linux-x86_64.AppImage"), primary: true },
+        { label: "tar.gz", href: dlAsset("timedart-linux-x86_64.tar.gz") },
+      ],
+      note: "Make it executable, then run — no install.",
+    },
+    {
+      os: "Windows",
+      downloads: [
+        { label: "Portable .zip", href: dlAsset("timedart-windows-x64.zip"), primary: true },
+      ],
+      note: "SmartScreen → More info → Run anyway.",
+    },
+    {
+      os: "macOS",
+      downloads: [
+        { label: "Universal .zip", href: dlAsset("timedart-macos-universal.zip"), primary: true },
+      ],
+      note: "Intel + Apple Silicon. First run: right-click → Open.",
+    },
+    {
+      os: "Android",
+      downloads: [
+        { label: "APK", href: dlAsset("timedart-android.apk"), primary: true },
+      ],
+      note: "Allow install from unknown sources.",
+    },
+  ],
 };
 
 export const nav = [
@@ -30,6 +75,7 @@ export const nav = [
   { label: "Screens", href: "#screenshots" },
   { label: "Keyboard", href: "#keyboard" },
   { label: "Under the hood", href: "#hood" },
+  { label: "Download", href: "#download" },
 ];
 
 export const hero = {
@@ -285,7 +331,7 @@ export const footer = {
     {
       heading: "Product",
       links: [
-        { label: "Desktop download", href: links.desktopDownload, soon: true },
+        { label: "Download", href: links.desktopDownload },
         { label: "Live demo", href: links.demo },
         { label: "Features", href: "#features" },
         { label: "Keyboard", href: "#keyboard" },
