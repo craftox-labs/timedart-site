@@ -24,11 +24,11 @@ export const links = {
   desktopDownload: "#download", // in-page download section
 };
 
-// The published release the download buttons point at. Bump this (one line) and
-// redeploy when a new beta is tagged — the asset filenames stay stable.
-export const releaseTag = "v0.9.0-beta.3";
+// Download links resolve to whatever is the *latest* GitHub release — no need to
+// bump a version per release (while pre-1.0 every beta publishes as latest; see
+// the release workflow's PRERELEASE rule). Asset filenames stay stable.
 const dlAsset = (file: string) =>
-  `${links.github}/releases/download/${releaseTag}/${file}`;
+  `${links.github}/releases/latest/download/${file}`;
 
 export const downloadSection = {
   eyebrow: "Download",
