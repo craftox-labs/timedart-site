@@ -179,9 +179,9 @@
     --hero-padding-top: 82px;
     --hero-padding-top-sm: 52px;
     --hero-glow-height: 640px;
-    --narrative-max-width: 760px;
+    --narrative-max-width: 780px;
     --narrative-quote-max-width: 720px;
-    --foot-brand-max-width: 440px;
+    --foot-brand-max-width: 480px;
 
     /* ---------- component sizing ---------- */
     --header-height: 68px;

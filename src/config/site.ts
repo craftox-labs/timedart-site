@@ -96,7 +96,7 @@ export const hero = {
   headingHighlight: "invoice",
   headingPost: ".",
   lede: "A fast, local-first time tracker for people who bill by the hour. Organise work as clients, projects and tasks - and turn tracked hours into a branded PDF invoice in a couple of clicks.",
-  note: "Install on Linux · macOS · Windows · Android, or <b>try it first in your browser</b> - no account either way, and your data never leaves your machine.",
+  note: "Install on Linux · macOS · Windows · Android, or <b>try the live browser demo first</b> -<br> no account either way, and your data never leaves your machine.",
   shot: {
     label: "timedart",
     src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/welcome.png",
@@ -302,7 +302,7 @@ export type HoodCell = {
 export const underTheHoodSection = {
   eyebrow: "Under the hood",
   heading: "Boring where it counts.",
-  lede: "One Flutter codebase, a real relational database, and no telemetry. The parts you'd want to audit are the parts we made simple.",
+  lede: "One Flutter codebase, a real relational database, and no telemetry. The parts you'd want to audit are the parts made simple.",
 };
 
 export const underTheHood: HoodCell[] = [
@@ -337,7 +337,7 @@ export type FooterGroup = { heading: string; links: FooterLink[] };
 export const footer = {
   brandDescription:
     "Fast, local-first time tracking & invoicing for people who bill by the hour. A product by Craftox.",
-  bottomLeft: "© 2026 Craftox - small, focused software tools.",
+  bottomLeft: "© 2026 Craftox - focused solutions.",
   bottomRight: "MIT licensed · built with Flutter & drift",
   groups: [
     {
@@ -361,7 +361,7 @@ export const footer = {
     {
       heading: "Craftox",
       links: [
-        { label: "craftox-labs.github.io", href: links.craftox },
+        { label: "craftox-labs", href: links.craftox },
         // { label: "All projects", href: links.githubAllProjects },
       ],
     },
