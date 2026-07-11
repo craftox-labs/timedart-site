@@ -13,7 +13,7 @@ export const site = {
 };
 
 export const links = {
-  demo: "https://timedart-demo.netlify.app",
+  demo: "https://demo.timedart.app",
   github: "https://github.com/craftox-labs/timedart",
   githubKeyboard: "https://github.com/craftox-labs/timedart#keyboard",
   githubReadme: "https://github.com/craftox-labs/timedart/blob/main/README.md",
@@ -40,7 +40,11 @@ export const downloadSection = {
     {
       os: "Linux",
       downloads: [
-        { label: "AppImage", href: dlAsset("timedart-linux-x86_64.AppImage"), primary: true },
+        {
+          label: "AppImage",
+          href: dlAsset("timedart-linux-x86_64.AppImage"),
+          primary: true,
+        },
         { label: "tar.gz", href: dlAsset("timedart-linux-x86_64.tar.gz") },
       ],
       note: "Make it executable, then run — no install.",
@@ -48,14 +52,22 @@ export const downloadSection = {
     {
       os: "Windows",
       downloads: [
-        { label: "Portable .zip", href: dlAsset("timedart-windows-x64.zip"), primary: true },
+        {
+          label: "Portable .zip",
+          href: dlAsset("timedart-windows-x64.zip"),
+          primary: true,
+        },
       ],
       note: "SmartScreen → More info → Run anyway.",
     },
     {
       os: "macOS",
       downloads: [
-        { label: "Universal .zip", href: dlAsset("timedart-macos-universal.zip"), primary: true },
+        {
+          label: "Universal .zip",
+          href: dlAsset("timedart-macos-universal.zip"),
+          primary: true,
+        },
       ],
       note: "Intel + Apple Silicon. First run: right-click → Open.",
     },
