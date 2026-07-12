@@ -45,11 +45,12 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
           function gtag(){ dataLayer.push(arguments); }
           gtag('js', new Date());
 
-          // Fires cleanly on initial hard-load AND all subsequent SPA transitions
+          // Run immediately on initial load
+          gtag('config', gaId, { page_path: window.location.pathname });
+
+          // Run on subsequent transitions if ClientRouter is added later
           document.addEventListener('astro:page-load', () => {
-            gtag('config', gaId, {
-              page_path: window.location.pathname
-            });
+            gtag('config', gaId, { page_path: window.location.pathname });
           });
         </script>
       </>
