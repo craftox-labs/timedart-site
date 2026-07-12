@@ -12,6 +12,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/partytown": "^2.1.7",
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/raleway": "^5.2.8",
     "astro": "^7.0.7"
