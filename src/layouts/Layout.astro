@@ -36,27 +36,20 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
         root.setAttribute("data-theme", stored === "light" ? "light" : "dark");
       })();
     </script>
-
-    {/* Only load analytics if the ID is present and the site is running in production */}
     {import.meta.env.PROD && gaId && (
       <>
         <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script type="text/partytown" async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
-        <script type="text/partytown" define:vars={{ gaId }}>
+        <script async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
           window.dataLayer = window.dataLayer || [];
           function gtag(){ dataLayer.push(arguments); }
           gtag('js', new Date());
-          gtag('config', gaId);
-        </script>
 
-        <!-- View Transitions / Client Router Handler -->
-        <script is:inline define:vars={{ gaId }}>
+          // Fires cleanly on initial hard-load AND all subsequent SPA transitions
           document.addEventListener('astro:page-load', () => {
-            if (window.gtag) {
-              window.gtag('config', gaId, {
-                page_path: window.location.pathname
-              });
-            }
+            gtag('config', gaId, {
+              page_path: window.location.pathname
+            });
           });
         </script>
       </>
