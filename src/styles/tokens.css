@@ -5,12 +5,12 @@
 */
 
 /*
-  The dark palette also applies to any .surface-dark element, so cards can stay
-  dark even under the light theme (to match the app's dark screenshots). Because
-  custom properties cascade, redeclaring them on a card re-themes its subtree.
+  Dark-only site (matches the app, which is dark-only). `.surface-dark` is kept
+  as an explicit dark-surface marker on cards/frames; it's redundant now that
+  the whole site is dark, but harmless and left in case a lighter section is
+  ever introduced.
 */
 :root,
-[data-theme="dark"],
 .surface-dark {
     /* ---------- color: surfaces ---------- */
     --color-bg: #111410;
@@ -50,39 +50,6 @@
         0 20px 60px -20px rgba(105, 226, 40, 0.22);
 
     /* ---------- color: dot palette (frame chrome) ---------- */
-    --color-dot-red: #e0603b;
-    --color-dot-yellow: #e0a800;
-}
-
-[data-theme="light"] {
-    --color-bg: #f4f6ee;
-    --color-bg-2: #eef1e6;
-    --color-surface: #ffffff;
-    --color-surface-2: #f3f6ec;
-    --color-chrome: #e7ebde;
-
-    --color-text: #33402a;
-    --color-heading: #141c0c;
-    --color-muted: #5f6b52;
-
-    --color-border: #dde3d0;
-    --color-border-strong: #c3cbb2;
-
-    --color-accent: #5cbf1c;
-    --color-accent-text: #2e6c0f;
-    --color-accent-deep: #2e6c0f;
-    --color-accent-dim: #c9ecb0;
-    --color-on-accent: #0b1004;
-
-    /* Flipped: deep green dominates on light, bright green as the accent. */
-    --icon-primary: var(--color-accent-deep);
-    --icon-secondary: var(--color-accent);
-
-    --shadow-frame: 0 30px 70px -34px rgba(30, 50, 10, 0.35);
-    --shadow-glow:
-        0 0 0 1px rgba(92, 191, 28, 0.25),
-        0 24px 60px -26px rgba(92, 191, 28, 0.28);
-
     --color-dot-red: #e0603b;
     --color-dot-yellow: #e0a800;
 }

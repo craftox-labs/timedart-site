@@ -26,16 +26,6 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     <meta property="og:image" content={site.ogImage} />
     <meta name="theme-color" content={site.themeColor} />
     <link rel="icon" type="image/svg+xml" href={site.favicon} />
-    <script is:inline>
-      (function () {
-        var root = document.documentElement;
-        var stored = null;
-        try {
-          stored = localStorage.getItem("timedart-theme");
-        } catch (e) {}
-        root.setAttribute("data-theme", stored === "light" ? "light" : "dark");
-      })();
-    </script>
     {import.meta.env.PROD && gaId && (
       <>
         <!-- Global site tag (gtag.js) - Google Analytics -->

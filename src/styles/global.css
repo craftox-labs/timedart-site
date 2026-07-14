@@ -125,11 +125,6 @@ kbd.accent {
     color: var(--color-accent-text);
 }
 
-[data-theme="light"] kbd.accent {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
-}
-
 /* ---------- shared layout utilities ---------- */
 .wrap {
     max-width: var(--container-max);
