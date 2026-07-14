@@ -1,0 +1,74 @@
+---
+// Reusable phone mockup: a CSS-drawn bezel (no asset for the frame) with a
+// top camera strip and a bottom chin, so the raw portrait screenshot reads as
+// a real device. Used in Hero and Showcase.
+interface Props {
+    src: string;
+    alt: string;
+    loading?: "lazy" | "eager";
+}
+const { src, alt, loading = "lazy" } = Astro.props;
+---
+
+<div class="phone surface-dark">
+    <div class="phone-screen">
+        <div class="phone-cam"></div>
+        <img src={src} alt={alt} loading={loading} />
+        <div class="phone-chin"></div>
+    </div>
+</div>
+
+<style>
+    .phone {
+        width: 100%;
+        background: var(--color-chrome);
+        border: var(--border-width) solid var(--color-border-strong);
+        border-radius: var(--phone-radius);
+        padding: var(--phone-bezel);
+        box-shadow: var(--shadow-frame);
+    }
+
+    .phone-screen {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        border-radius: calc(var(--phone-radius) - var(--phone-bezel));
+        overflow: hidden;
+        background: var(--color-bg-2);
+    }
+
+    /* Top strip standing in for the camera housing. */
+    .phone-cam {
+        flex: none;
+        height: var(--phone-cam-height);
+        position: relative;
+    }
+
+    .phone-cam::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: var(--phone-cam-dot);
+        height: var(--phone-cam-dot);
+        border-radius: var(--radius-full);
+        background: radial-gradient(
+            circle at 35% 30%,
+            var(--color-border-strong),
+            #05070b 70%
+        );
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+    }
+
+    .phone-screen img {
+        width: 100%;
+        display: block;
+    }
+
+    /* Small chin to balance the camera strip and elongate the body. */
+    .phone-chin {
+        flex: none;
+        height: var(--phone-chin-height);
+    }
+</style>

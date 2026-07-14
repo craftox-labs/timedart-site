@@ -90,6 +90,9 @@ export const nav = [
   { label: "Download", href: "#download" },
 ];
 
+const media = (file: string) =>
+  `https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/${file}`;
+
 export const hero = {
   eyebrow: "Local-first time tracking · free & open source",
   headingPre: "Track your hours the way you think about your work - then ",
@@ -99,8 +102,13 @@ export const hero = {
   note: "Install on Linux · macOS · Windows · Android, or <b>try the live browser demo first</b> -<br> no account either way, and your data never leaves your machine.",
   shot: {
     label: "timedart",
-    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/welcome.png",
+    src: media("welcome.png"),
     alt: "timedart welcome screen - track time against your projects and send branded invoices",
+  },
+  // Phone twin of the welcome shot, shown overlapping the desktop frame.
+  phone: {
+    src: media("mobile-welcome.png"),
+    alt: "timedart welcome screen on a phone - the same first-run, on mobile",
   },
 };
 
@@ -169,7 +177,7 @@ export const pillars: Pillar[] = [
   {
     title: "Yours, on your disk",
     description:
-      "Everything persists locally in SQLite. No account, no cloud, no sync - nothing leaves your machine, and clearing site data is the only reset. Privacy isn't a setting here; it's the architecture.",
+      "Everything persists locally in SQLite. No account, no cloud, no sync - nothing leaves your machine, and no copy sits on anyone's server. Privacy isn't a setting here; it's the architecture.",
     tag: "local-first · SQLite",
     wide: true,
     icon: "grid",
@@ -198,8 +206,8 @@ export const pillars: Pillar[] = [
   {
     title: "One app, every screen",
     description:
-      "A roomy two-pane layout on desktop folds into a drawer on narrow windows - the same features throughout.",
-    tag: "Linux · macOS · Windows",
+      "A roomy two-pane layout on desktop folds into a one-hand layout on your phone - the same features throughout.",
+    tag: "Linux · macOS · Windows · Android",
     icon: "device",
   },
 ];
@@ -217,6 +225,9 @@ export type ShowcaseItem = {
   title: string;
   description: string;
   full?: boolean;
+  // Optional phone twin — when present the tile shows the desktop shot with
+  // this phone overlapping its corner (side alternates automatically).
+  phone?: { src: string; alt: string };
 };
 
 export const showcaseSection = {
@@ -226,28 +237,35 @@ export const showcaseSection = {
 };
 
 export const showcase: ShowcaseItem[] = [
-  // Temporarily removed - re-add to restore the half-width "guided first run" tile.
   {
     label: "onboarding",
-    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/onboarding.png",
+    src: media("onboarding.png"),
     alt: "Guided first-run onboarding setting up invoice identity",
     title: "A guided first run",
     description:
-      "Learn the flow and set up your invoice identity - name, logo, region, currency - in a skippable wizard.",
+      "Learn the flow and set up your invoice identity - name, logo, region, currency - in a skippable wizard, on desktop or phone.",
     full: true,
+    phone: {
+      src: media("mobile-onboarding.png"),
+      alt: "The onboarding flow on a phone",
+    },
   },
   {
     label: "branding",
-    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/branding.png",
+    src: media("branding.png"),
     alt: "Invoice branding editor with reusable templates and profiles",
     title: "Make it yours",
     description:
-      "Reusable templates and profiles for how invoices look and read - colours, logo, font, payment details.",
+      "Reusable templates and profiles for how invoices look and read - colours, logo, font, payment details. Edit them on desktop or phone.",
     full: true,
+    phone: {
+      src: media("mobile-profile.png"),
+      alt: "Editing an invoice profile on a phone",
+    },
   },
   {
     label: "timedart - invoice preview",
-    src: "https://raw.githubusercontent.com/craftox-labs/timedart/main/docs/media/invoice.png",
+    src: media("invoice.png"),
     alt: "Branded, region-aware invoice preview generated from tracked hours",
     title: "Invoices in seconds",
     description:
@@ -344,7 +362,7 @@ export const underTheHood: HoodCell[] = [
   {
     label: "LICENSE",
     title: "MIT · open source",
-    description: "Free forever, auditable, forkable. © 2026 Craftox.",
+    description: "Free forever, auditable, forkable. © 2026 craftox.",
   },
 ];
 
@@ -353,8 +371,8 @@ export type FooterGroup = { heading: string; links: FooterLink[] };
 
 export const footer = {
   brandDescription:
-    "Fast, local-first time tracking & invoicing for people who bill by the hour. A product by Craftox.",
-  bottomLeft: "© 2026 Craftox - focused solutions.",
+    "Fast, local-first time tracking & invoicing for people who bill by the hour. A product by craftox.",
+  bottomLeft: "© 2026 craftox - focused solutions.",
   bottomRight: "MIT licensed · built with Flutter & drift",
   groups: [
     {
@@ -376,7 +394,7 @@ export const footer = {
       ],
     },
     {
-      heading: "Craftox",
+      heading: "craftox",
       links: [
         { label: "craftox-labs", href: links.craftox },
         // { label: "All projects", href: links.githubAllProjects },

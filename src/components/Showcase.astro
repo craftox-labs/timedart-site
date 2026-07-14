@@ -1,5 +1,6 @@
 ---
 import { showcase, showcaseSection } from "../config/site";
+import Phone from "./Phone.astro";
 ---
 
 <section class="section" id="screenshots">
@@ -12,10 +13,29 @@ import { showcase, showcaseSection } from "../config/site";
 
         <div class="showcase">
             {
-                showcase.map((item) => (
+                showcase.map((item, i) => (
                     <div class:list={["shot", { "shot-full": item.full }]}>
-                        <div class="frame surface-dark">
-                            <img src={item.src} alt={item.alt} loading="lazy" />
+                        <div
+                            class:list={[
+                                "combo",
+                                { "has-phone": item.phone, left: i % 2 === 1 },
+                            ]}
+                        >
+                            <div class="frame surface-dark desktop">
+                                <img
+                                    src={item.src}
+                                    alt={item.alt}
+                                    loading="lazy"
+                                />
+                            </div>
+                            {item.phone && (
+                                <div class="phone-wrap">
+                                    <Phone
+                                        src={item.phone.src}
+                                        alt={item.phone.alt}
+                                    />
+                                </div>
+                            )}
                         </div>
                         <div class="cap">
                             <h3>{item.title}</h3>
@@ -32,7 +52,7 @@ import { showcase, showcaseSection } from "../config/site";
     .showcase {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: var(--space-26);
+        gap: var(--space-56) var(--space-26);
     }
 
     .shot .cap {
@@ -53,13 +73,71 @@ import { showcase, showcaseSection } from "../config/site";
         grid-column: span 2;
     }
 
+    /* Desktop shot with a phone overlapping one corner (side alternates). */
+    .combo {
+        position: relative;
+    }
+
+    .combo.has-phone {
+        padding-bottom: var(--space-36);
+    }
+
+    .combo.has-phone .desktop {
+        width: 84%;
+    }
+
+    .combo.has-phone.left .desktop {
+        margin-left: auto;
+    }
+
+    .desktop img {
+        width: 100%;
+        display: block;
+    }
+
+    .phone-wrap {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: clamp(150px, 17vw, 210px);
+        z-index: 2;
+    }
+
+    .combo.left .phone-wrap {
+        right: auto;
+        left: 0;
+    }
+
     @media (max-width: 640px) {
         .showcase {
             grid-template-columns: 1fr;
+            gap: var(--space-44);
         }
 
         .shot-full {
             grid-column: span 1;
+        }
+
+        /* Stack with a clear gap — no overlap — on phones. */
+        .combo.has-phone {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-24);
+            padding-bottom: 0;
+        }
+
+        .combo.has-phone .desktop,
+        .combo.has-phone.left .desktop {
+            width: 100%;
+            margin: 0;
+        }
+
+        .phone-wrap,
+        .combo.left .phone-wrap {
+            position: static;
+            width: clamp(180px, 52vw, 220px);
+            margin-top: 0;
         }
     }
 </style>

@@ -1,5 +1,6 @@
 ---
 import { hero, links } from "../config/site";
+import Phone from "./Phone.astro";
 ---
 
 <section class="hero">
@@ -51,9 +52,20 @@ import { hero, links } from "../config/site";
         </div>
 
         <div class="hero-shot">
-            <div class="frame surface-dark">
+            <div class="frame surface-dark desktop">
                 <img src={hero.shot.src} alt={hero.shot.alt} loading="eager" />
             </div>
+            {
+                hero.phone && (
+                    <div class="phone-wrap">
+                        <Phone
+                            src={hero.phone.src}
+                            alt={hero.phone.alt}
+                            loading="eager"
+                        />
+                    </div>
+                )
+            }
         </div>
     </div>
 </section>
@@ -129,10 +141,52 @@ import { hero, links } from "../config/site";
     }
 
     .hero-shot {
-        margin: var(--space-56) auto 0;
+        margin: var(--space-56) auto var(--space-40);
         max-width: var(--hero-shot-max-width);
         position: relative;
         z-index: 1;
+        /* Room for the phone to hang below the desktop baseline (offset, not
+           flush) — matches the showcase composition. */
+        padding-bottom: var(--space-40);
+    }
+
+    .hero-shot .desktop {
+        width: 86%;
+    }
+
+    .hero-shot .desktop img {
+        width: 100%;
+        display: block;
+    }
+
+    .hero-shot .phone-wrap {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: clamp(160px, 18vw, 224px);
+        z-index: 2;
+    }
+
+    @media (max-width: 720px) {
+        /* Stack with a clear gap — no overlap — on small screens. */
+        .hero-shot {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-24);
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .hero-shot .desktop {
+            width: 100%;
+        }
+
+        .hero-shot .phone-wrap {
+            position: static;
+            width: clamp(190px, 54vw, 232px);
+            margin-top: 0;
+        }
     }
 
     @media (max-width: 640px) {

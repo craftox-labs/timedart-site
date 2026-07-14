@@ -208,6 +208,14 @@
     --kbd-min-width: 26px;
     --key-row-label-width: 132px;
 
+    /* phone mockup (Phone.astro): the camera strip + chin elongate the body
+       past the raw screenshot so it reads like a real device. */
+    --phone-radius: 28px;
+    --phone-bezel: 7px;
+    --phone-cam-height: 22px;
+    --phone-chin-height: 13px;
+    --phone-cam-dot: 7px;
+
     /* ---------- borders ---------- */
     --border-width: 1px;
     --border-width-thick: 2px;
