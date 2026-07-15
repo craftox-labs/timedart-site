@@ -233,7 +233,7 @@ export type ShowcaseItem = {
 export const showcaseSection = {
   eyebrow: "A look inside",
   heading: "Native app polish, screen to screen.",
-  lede: "A considered Material 3 theme in timedart green, Raleway and Mona Sans throughout, one design-token source keeping it consistent.",
+  lede: "A considered Material 3 theme in timedart green, Raleway and Outfit throughout, one design-token source keeping it consistent.",
 };
 
 export const showcase: ShowcaseItem[] = [

@@ -56,8 +56,8 @@
 
 :root {
     /* ---------- typography: families ---------- */
-    --font-sans: "Mona Sans", system-ui, -apple-system, sans-serif;
-    --font-mono: "Mona Sans", system-ui, -apple-system, sans-serif;
+    --font-sans: "Outfit", system-ui, -apple-system, sans-serif;
+    --font-mono: "Outfit", system-ui, -apple-system, sans-serif;
     /*--font-mono:
         "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;*/
     --font-heading: "Raleway Variable", Georgia, serif;
@@ -152,12 +152,12 @@
     --section-head-max-width: 1180px;
     --section-lede-max-width: 1180px;
     --hero-max-width: 840px;
-    --hero-lede-max-width: 800px;
+    --hero-lede-max-width: 720px;
     --hero-shot-max-width: 1180px;
     --hero-padding-top: 82px;
     --hero-padding-top-sm: 52px;
     --hero-glow-height: 640px;
-    --narrative-max-width: 780px;
+    --narrative-max-width: 740px;
     --narrative-quote-max-width: 720px;
     --foot-brand-max-width: 480px;
 
