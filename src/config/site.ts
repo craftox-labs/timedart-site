@@ -91,7 +91,9 @@ export const nav = [
   { label: "Keyboard", href: "/#keyboard" },
   { label: "Under the hood", href: "/#hood" },
   { label: "Download", href: "/#download" },
-  { label: "Docs", href: "/docs" },
+  // Point at the first page directly (not the /docs meta-refresh redirect,
+  // which is a hard load that bypasses view transitions and flashes).
+  { label: "Docs", href: "/docs/getting-started" },
 ];
 
 const media = (file: string) =>
