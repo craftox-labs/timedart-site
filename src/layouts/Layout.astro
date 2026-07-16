@@ -3,6 +3,7 @@ import "@fontsource-variable/jetbrains-mono";
 import "@fontsource-variable/raleway";
 import "@fontsource-variable/raleway/wght-italic.css";
 import "../styles/global.css";
+import { ClientRouter } from "astro:transitions";
 import { site } from "../config/site";
 
 interface Props {
@@ -27,6 +28,7 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     <meta property="og:image" content={site.ogImage} />
     <meta name="theme-color" content={site.themeColor} />
     <link rel="icon" type="image/svg+xml" href={site.favicon} />
+    <ClientRouter />
     {import.meta.env.PROD && gaId && (
       <>
         <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -51,15 +53,19 @@ const gaId = import.meta.env.PUBLIC_GA_ID;
     <slot />
     <script>
       // Open off-site links in a new tab. Internal "#" anchors start with
-      // neither http nor a different host, so they're left alone.
-      for (const a of document.querySelectorAll<HTMLAnchorElement>(
-        'a[href^="http"]',
-      )) {
-        if (a.host !== location.host) {
-          a.target = "_blank";
-          a.rel = "noopener noreferrer";
+      // neither http nor a different host, so they're left alone. Runs on each
+      // page load (astro:page-load fires on initial load + view transitions).
+      function markExternalLinks() {
+        for (const a of document.querySelectorAll<HTMLAnchorElement>(
+          'a[href^="http"]',
+        )) {
+          if (a.host !== location.host) {
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+          }
         }
       }
+      document.addEventListener("astro:page-load", markExternalLinks);
     </script>
   </body>
 </html>

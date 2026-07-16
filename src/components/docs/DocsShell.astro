@@ -2,20 +2,28 @@
 import type { DocSection, DocPage, DocNeighbours } from "../../lib/docs";
 
 interface Props {
-  sections: DocSection[];
-  currentSlug?: string;
-  neighbours?: DocNeighbours;
+    sections: DocSection[];
+    currentSlug?: string;
+    neighbours?: DocNeighbours;
 }
 
 const { sections, currentSlug, neighbours } = Astro.props;
 ---
 
 <div class="docs-shell wrap">
-    <nav class="docs-sidebar" aria-label="Documentation">
+    <button
+        class="docs-menu-toggle"
+        aria-expanded="false"
+        aria-controls="docs-menu"
+    >
+        Contents
+        <span class="docs-menu-caret" aria-hidden="true">›</span>
+    </button>
+    <nav id="docs-menu" class="docs-sidebar" aria-label="Documentation">
         {
             sections.map((section) => (
                 <div class="docs-section">
-                    <h5>{section.group}</h5>
+                    {section.pages.length > 1 && <h5>{section.group}</h5>}
                     <ul>
                         {section.pages.map((page: DocPage) => (
                             <li>
@@ -43,25 +51,37 @@ const { sections, currentSlug, neighbours } = Astro.props;
                 <nav class="docs-pager" aria-label="Page navigation">
                     <a
                         class="docs-pager-link docs-pager-prev"
-                        href={neighbours.prev ? `/docs/${neighbours.prev.slug}` : undefined}
+                        href={
+                            neighbours.prev
+                                ? `/docs/${neighbours.prev.slug}`
+                                : undefined
+                        }
                         aria-disabled={!neighbours.prev}
                     >
                         {neighbours.prev && (
                             <>
-                                <span class="docs-pager-label">Previous</span>
-                                <span class="docs-pager-title">{neighbours.prev.title}</span>
+                                <span class="docs-pager-label">‹ Previous</span>
+                                <span class="docs-pager-title">
+                                    {neighbours.prev.title}
+                                </span>
                             </>
                         )}
                     </a>
                     <a
                         class="docs-pager-link docs-pager-next"
-                        href={neighbours.next ? `/docs/${neighbours.next.slug}` : undefined}
+                        href={
+                            neighbours.next
+                                ? `/docs/${neighbours.next.slug}`
+                                : undefined
+                        }
                         aria-disabled={!neighbours.next}
                     >
                         {neighbours.next && (
                             <>
-                                <span class="docs-pager-label">Next</span>
-                                <span class="docs-pager-title">{neighbours.next.title}</span>
+                                <span class="docs-pager-label">Next ›</span>
+                                <span class="docs-pager-title">
+                                    {neighbours.next.title}
+                                </span>
                             </>
                         )}
                     </a>
@@ -76,7 +96,7 @@ const { sections, currentSlug, neighbours } = Astro.props;
         display: grid;
         grid-template-columns: 220px minmax(0, 1fr);
         gap: var(--space-64);
-        padding-top: var(--space-52);
+        padding-top: var(--space-36);
         padding-bottom: var(--section-padding-block);
         align-items: start;
     }
@@ -86,8 +106,11 @@ const { sections, currentSlug, neighbours } = Astro.props;
         top: calc(var(--header-height) + var(--space-24));
     }
 
+    /* Tight, flat list — single-page sections (no header) read as one menu.
+       A titled (multi-page) group gets its breathing room from the h5's own
+       top margin below. */
     .docs-section + .docs-section {
-        margin-top: var(--space-28);
+        margin-top: var(--space-6);
     }
 
     .docs-sidebar h5 {
@@ -96,7 +119,11 @@ const { sections, currentSlug, neighbours } = Astro.props;
         letter-spacing: var(--tracking-widest-plus);
         color: var(--color-muted);
         font-weight: var(--font-weight-normal);
-        margin: 0 0 var(--space-10);
+        margin: var(--space-16) 0 var(--space-10);
+    }
+
+    .docs-section:first-child h5 {
+        margin-top: 0;
     }
 
     .docs-sidebar ul {
@@ -133,12 +160,11 @@ const { sections, currentSlug, neighbours } = Astro.props;
         display: flex;
         justify-content: space-between;
         gap: var(--space-16);
-        margin-top: var(--space-56);
-        padding-top: var(--space-26);
-        border-top: var(--border-width) solid var(--color-border);
+        margin-top: var(--space-40);
     }
 
     .docs-pager-link {
+        flex: 1; /* 50/50 halves, like the app's Expanded prev/next cards */
         display: flex;
         flex-direction: column;
         gap: var(--space-4);
@@ -158,28 +184,103 @@ const { sections, currentSlug, neighbours } = Astro.props;
 
     .docs-pager-next {
         text-align: right;
-        margin-left: auto;
     }
 
+    /* Match the app's prev/next: plain muted label (no caps) + a green title. */
     .docs-pager-label {
-        font-size: var(--text-xs);
-        text-transform: uppercase;
-        letter-spacing: var(--tracking-wider);
+        font-size: var(--text-sm);
         color: var(--color-muted);
     }
 
     .docs-pager-title {
-        color: var(--color-heading);
+        color: var(--color-accent);
         font-weight: var(--font-weight-medium);
+    }
+
+    /* Desktop: no toggle, sidebar always shown (display:none keeps the button
+       out of the grid so the two columns stay put). */
+    .docs-menu-toggle {
+        display: none;
     }
 
     @media (max-width: 900px) {
         .docs-shell {
             grid-template-columns: 1fr;
+            /* Spacing is set per-row via margins below (a single row-gap can't
+               be both the 6px menu-item rhythm and the 36px content margin). */
+            gap: 0;
+        }
+
+        /* Content leads by the top margin, whether the (collapsed) toggle or the
+           open menu sits above it. */
+        .docs-content {
+            margin-top: var(--space-36);
         }
 
         .docs-sidebar {
             position: static;
         }
+
+        /* The content sits right under a "Contents" toggle; the menu opens on
+           demand instead of pushing every link above the page. */
+        .docs-menu-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-8);
+            align-self: start;
+            font-family: var(--font-sans);
+            font-size: var(--text-base);
+            font-weight: var(--font-weight-medium);
+            color: var(--color-heading);
+            background: var(--color-surface);
+            border: var(--border-width) solid var(--color-border);
+            border-radius: var(--radius-md);
+            padding: var(--space-10) var(--space-14);
+            cursor: pointer;
+        }
+
+        .docs-menu-caret {
+            color: var(--color-muted);
+            transition: transform var(--transition-base);
+        }
+
+        .docs-menu-toggle[aria-expanded="true"] .docs-menu-caret {
+            transform: rotate(90deg);
+        }
+
+        .docs-sidebar {
+            display: none;
+        }
+
+        .docs-sidebar.open {
+            display: block;
+            /* Sit under the toggle by one item-gap, so Contents→first-item
+               matches the item↔item rhythm. */
+            margin-top: var(--space-6);
+        }
+
+        /* Match the menu rows to the Contents toggle's height + left inset for
+           a bigger touch target and aligned text. */
+        .docs-sidebar a {
+            padding: var(--space-10) var(--space-14);
+        }
     }
 </style>
+
+<script>
+    // Mobile "Contents" toggle. Re-wired on each page load so it survives view
+    // transitions (the menu re-renders closed on navigation, which is the
+    // desired behaviour anyway).
+    function initDocsMenu() {
+        const btn = document.querySelector<HTMLButtonElement>(
+            ".docs-menu-toggle",
+        );
+        const nav = document.getElementById("docs-menu");
+        if (!btn || !nav) return;
+        btn.addEventListener("click", () => {
+            const open = nav.classList.toggle("open");
+            btn.setAttribute("aria-expanded", String(open));
+        });
+    }
+    document.addEventListener("astro:page-load", initDocsMenu);
+</script>

@@ -270,18 +270,43 @@ kbd.accent {
 /* Rendered markdown body for /docs pages — plain CommonMark, so styled
    globally rather than per-component. Callouts come from remark-callouts.mjs
    tagging blockquotes with data-callout per the docs contract. */
+/* Reading surface: a size up and a weight down from the dense UI, roomier
+   leading — mirrors the in-app docs. */
+.docs-prose {
+    font-size: var(--text-md);
+    font-weight: var(--font-weight-light);
+    line-height: 1.6;
+}
+
+/* Green Raleway-italic headings at the in-app docs scale (30/23/19). Weight +
+   italic come from the base heading rule; only size/colour/spacing here. */
+.docs-prose h1 {
+    font-size: 30px;
+    color: var(--color-accent);
+    /* Dial back the wide base-h1 tracking for the docs title. */
+    letter-spacing: var(--tracking-tight-sm);
+    margin: 0 0 var(--space-16);
+}
+
 .docs-prose h2 {
-    font-size: var(--text-3xl);
-    margin: var(--space-40) 0 var(--space-16);
+    font-size: 23px;
+    color: var(--color-accent);
+    margin: var(--space-20) 0 var(--space-12);
 }
 
 .docs-prose h3 {
-    font-size: var(--text-xl);
-    margin: var(--space-30) 0 var(--space-12);
+    font-size: 19px;
+    color: var(--color-accent);
+    margin: var(--space-16) 0 var(--space-8);
 }
 
 .docs-prose p {
     margin: var(--space-16) 0;
+}
+
+/* Bold stands out against the light (300) body weight. */
+.docs-prose strong {
+    font-weight: var(--font-weight-bold);
 }
 
 .docs-prose ul,
@@ -338,10 +363,15 @@ kbd.accent {
     font-size: var(--text-sm-plus);
 }
 
+/* Inline code = keyboard keys (per the docs contract), so render as keycaps
+   like the app: flat, bordered, app font — not a filled mono chip. */
 .docs-prose :not(pre) > code {
-    background: var(--color-surface-2);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    background: transparent;
     border: var(--border-width) solid var(--color-border);
-    border-radius: var(--radius-xs);
+    border-radius: var(--radius-md);
     padding: var(--space-2) var(--space-6);
 }
 
@@ -351,12 +381,13 @@ kbd.accent {
     margin: var(--space-20) 0;
 }
 
-/* Callouts: a blockquote whose first line is bold "Note:", "Tip:" or "Warning:" */
+/* Callouts: a blockquote whose first line is bold "Note:", "Tip:" or "Warning:"
+   Flat, like the app — a tinted fill + a faint full border on the button
+   radius (no heavy left rule), with a coloured label. */
 .docs-prose blockquote {
     margin: var(--space-20) 0;
-    padding: var(--space-14) var(--space-18);
-    border-left: var(--border-width-thick) solid var(--color-border-strong);
-    background: var(--color-surface-2);
+    padding: var(--space-16) var(--space-18);
+    border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-md);
     color: var(--color-text);
 }
@@ -365,27 +396,20 @@ kbd.accent {
     margin: 0;
 }
 
-.docs-prose blockquote[data-callout="note"] {
-    border-left-color: var(--color-accent);
-    background: var(--color-accent-dim);
-}
-
-.docs-prose blockquote[data-callout="note"] strong:first-child {
-    color: var(--color-accent-text);
-}
-
+.docs-prose blockquote[data-callout="note"],
 .docs-prose blockquote[data-callout="tip"] {
-    border-left-color: var(--color-accent);
-    background: var(--color-accent-dim);
+    border-color: color-mix(in srgb, var(--color-accent) 35%, transparent);
+    background: color-mix(in srgb, var(--color-accent) 8%, transparent);
 }
 
+.docs-prose blockquote[data-callout="note"] strong:first-child,
 .docs-prose blockquote[data-callout="tip"] strong:first-child {
     color: var(--color-accent-text);
 }
 
 .docs-prose blockquote[data-callout="warning"] {
-    border-left-color: var(--color-dot-yellow);
-    background: color-mix(in srgb, var(--color-dot-yellow) 12%, var(--color-surface-2));
+    border-color: color-mix(in srgb, var(--color-dot-yellow) 35%, transparent);
+    background: color-mix(in srgb, var(--color-dot-yellow) 8%, transparent);
 }
 
 .docs-prose blockquote[data-callout="warning"] strong:first-child {

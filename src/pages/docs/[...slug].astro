@@ -26,10 +26,10 @@ const neighbours = await getDocNeighbours(entry.id);
     description={entry.data.summary}
 >
     <Header />
-    <main id="top" class="section">
+    <main id="top">
         <DocsShell sections={sections} currentSlug={entry.id} neighbours={neighbours}>
             <article class="docs-prose">
-                {entry.data.summary && <p class="docs-eyebrow">{entry.data.summary}</p>}
+                {entry.data.summary && <p class="eyebrow docs-eyebrow">{entry.data.summary}</p>}
                 <Content />
             </article>
         </DocsShell>
@@ -38,9 +38,10 @@ const neighbours = await getDocNeighbours(entry.id);
 </Layout>
 
 <style>
+    /* Colour/size/tracking come from .eyebrow; here just kill the inherited
+       paragraph top margin so the eyebrow's top lines up with the menu, and set
+       the gap down to the H1. */
     .docs-eyebrow {
-        color: var(--color-muted);
-        font-size: var(--text-lg);
-        margin-bottom: var(--space-16);
+        margin: 0 0 var(--space-20);
     }
 </style>

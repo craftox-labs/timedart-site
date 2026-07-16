@@ -81,13 +81,16 @@ export const downloadSection = {
   ],
 };
 
+// Homepage sections are linked absolutely (`/#…`) so the nav works from the
+// docs pages too; on the homepage the browser still treats them as in-page
+// scrolls (same path, hash only).
 export const nav = [
-  { label: "Flow", href: "#how-it-works" },
-  { label: "Features", href: "#features" },
-  { label: "Screens", href: "#screenshots" },
-  { label: "Keyboard", href: "#keyboard" },
-  { label: "Under the hood", href: "#hood" },
-  { label: "Download", href: "#download" },
+  { label: "Flow", href: "/#how-it-works" },
+  { label: "Features", href: "/#features" },
+  { label: "Screens", href: "/#screenshots" },
+  { label: "Keyboard", href: "/#keyboard" },
+  { label: "Under the hood", href: "/#hood" },
+  { label: "Download", href: "/#download" },
   { label: "Docs", href: "/docs" },
 ];
 
