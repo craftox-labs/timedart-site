@@ -1,0 +1,185 @@
+---
+import type { DocSection, DocPage, DocNeighbours } from "../../lib/docs";
+
+interface Props {
+  sections: DocSection[];
+  currentSlug?: string;
+  neighbours?: DocNeighbours;
+}
+
+const { sections, currentSlug, neighbours } = Astro.props;
+---
+
+<div class="docs-shell wrap">
+    <nav class="docs-sidebar" aria-label="Documentation">
+        {
+            sections.map((section) => (
+                <div class="docs-section">
+                    <h5>{section.group}</h5>
+                    <ul>
+                        {section.pages.map((page: DocPage) => (
+                            <li>
+                                <a
+                                    href={`/docs/${page.slug}`}
+                                    aria-current={
+                                        page.slug === currentSlug
+                                            ? "page"
+                                            : undefined
+                                    }
+                                >
+                                    {page.title}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            ))
+        }
+    </nav>
+    <div class="docs-content">
+        <slot />
+        {
+            neighbours && (neighbours.prev || neighbours.next) && (
+                <nav class="docs-pager" aria-label="Page navigation">
+                    <a
+                        class="docs-pager-link docs-pager-prev"
+                        href={neighbours.prev ? `/docs/${neighbours.prev.slug}` : undefined}
+                        aria-disabled={!neighbours.prev}
+                    >
+                        {neighbours.prev && (
+                            <>
+                                <span class="docs-pager-label">Previous</span>
+                                <span class="docs-pager-title">{neighbours.prev.title}</span>
+                            </>
+                        )}
+                    </a>
+                    <a
+                        class="docs-pager-link docs-pager-next"
+                        href={neighbours.next ? `/docs/${neighbours.next.slug}` : undefined}
+                        aria-disabled={!neighbours.next}
+                    >
+                        {neighbours.next && (
+                            <>
+                                <span class="docs-pager-label">Next</span>
+                                <span class="docs-pager-title">{neighbours.next.title}</span>
+                            </>
+                        )}
+                    </a>
+                </nav>
+            )
+        }
+    </div>
+</div>
+
+<style>
+    .docs-shell {
+        display: grid;
+        grid-template-columns: 220px minmax(0, 1fr);
+        gap: var(--space-64);
+        padding-top: var(--space-52);
+        padding-bottom: var(--section-padding-block);
+        align-items: start;
+    }
+
+    .docs-sidebar {
+        position: sticky;
+        top: calc(var(--header-height) + var(--space-24));
+    }
+
+    .docs-section + .docs-section {
+        margin-top: var(--space-28);
+    }
+
+    .docs-sidebar h5 {
+        font-size: var(--text-xs-plus);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-widest-plus);
+        color: var(--color-muted);
+        font-weight: var(--font-weight-normal);
+        margin: 0 0 var(--space-10);
+    }
+
+    .docs-sidebar ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-6);
+    }
+
+    .docs-sidebar a {
+        display: block;
+        color: var(--color-text);
+        font-size: var(--text-base);
+        padding: var(--space-4) var(--space-10);
+        border-radius: var(--radius-sm);
+    }
+
+    .docs-sidebar a:hover {
+        color: var(--color-accent-text);
+        background: var(--color-surface-2);
+    }
+
+    .docs-sidebar a[aria-current="page"] {
+        color: var(--color-accent-text);
+        background: var(--color-accent-dim);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .docs-content {
+        min-width: 0;
+        max-width: var(--narrative-max-width);
+    }
+
+    .docs-pager {
+        display: flex;
+        justify-content: space-between;
+        gap: var(--space-16);
+        margin-top: var(--space-56);
+        padding-top: var(--space-26);
+        border-top: var(--border-width) solid var(--color-border);
+    }
+
+    .docs-pager-link {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-4);
+        padding: var(--space-12) var(--space-16);
+        border-radius: var(--radius-md);
+        border: var(--border-width) solid var(--color-border);
+        min-width: 0;
+    }
+
+    .docs-pager-link[aria-disabled="true"] {
+        visibility: hidden;
+    }
+
+    .docs-pager-link:hover {
+        border-color: var(--color-border-strong);
+    }
+
+    .docs-pager-next {
+        text-align: right;
+        margin-left: auto;
+    }
+
+    .docs-pager-label {
+        font-size: var(--text-xs);
+        text-transform: uppercase;
+        letter-spacing: var(--tracking-wider);
+        color: var(--color-muted);
+    }
+
+    .docs-pager-title {
+        color: var(--color-heading);
+        font-weight: var(--font-weight-medium);
+    }
+
+    @media (max-width: 900px) {
+        .docs-shell {
+            grid-template-columns: 1fr;
+        }
+
+        .docs-sidebar {
+            position: static;
+        }
+    }
+</style>

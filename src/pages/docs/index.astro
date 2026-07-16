@@ -1,0 +1,75 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import DocsShell from "../../components/docs/DocsShell.astro";
+import { getDocsSections } from "../../lib/docs";
+import { site } from "../../config/site";
+
+const sections = await getDocsSections();
+---
+
+<Layout title={`Docs · ${site.title}`}>
+    <Header />
+    <main id="top" class="section">
+        <DocsShell sections={sections}>
+            <div class="docs-index">
+                <h1>Documentation</h1>
+                <p class="docs-summary">
+                    Everything about tracking time and turning it into invoices with {site.title}.
+                </p>
+                {
+                    sections.map((section) => (
+                        <section class="docs-index-section">
+                            <h2>{section.group}</h2>
+                            <ul>
+                                {section.pages.map((page) => (
+                                    <li>
+                                        <a href={`/docs/${page.slug}`}>{page.title}</a>
+                                        {page.summary && <p>{page.summary}</p>}
+                                    </li>
+                                ))}
+                            </ul>
+                        </section>
+                    ))
+                }
+            </div>
+        </DocsShell>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .docs-summary {
+        color: var(--color-muted);
+        font-size: var(--text-lg);
+        margin-top: var(--space-16);
+    }
+
+    .docs-index-section {
+        margin-top: var(--space-40);
+    }
+
+    .docs-index-section h2 {
+        font-size: var(--text-3xl);
+        margin-bottom: var(--space-16);
+    }
+
+    .docs-index-section ul {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-16);
+    }
+
+    .docs-index-section a {
+        color: var(--color-accent-text);
+        font-size: var(--text-lg);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .docs-index-section li p {
+        margin: var(--space-4) 0 0;
+        color: var(--color-muted);
+        font-size: var(--text-base);
+    }
+</style>

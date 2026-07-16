@@ -1,0 +1,46 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import DocsShell from "../../components/docs/DocsShell.astro";
+import { getDocsSections, getDocNeighbours } from "../../lib/docs";
+import { site } from "../../config/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("docs");
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const sections = await getDocsSections();
+const neighbours = await getDocNeighbours(entry.id);
+---
+
+<Layout
+    title={`${entry.data.title} · ${site.title} docs`}
+    description={entry.data.summary}
+>
+    <Header />
+    <main id="top" class="section">
+        <DocsShell sections={sections} currentSlug={entry.id} neighbours={neighbours}>
+            <article class="docs-prose">
+                {entry.data.summary && <p class="docs-eyebrow">{entry.data.summary}</p>}
+                <Content />
+            </article>
+        </DocsShell>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .docs-eyebrow {
+        color: var(--color-muted);
+        font-size: var(--text-lg);
+        margin-bottom: var(--space-16);
+    }
+</style>

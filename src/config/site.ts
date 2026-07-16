@@ -88,6 +88,7 @@ export const nav = [
   { label: "Keyboard", href: "#keyboard" },
   { label: "Under the hood", href: "#hood" },
   { label: "Download", href: "#download" },
+  { label: "Docs", href: "/docs" },
 ];
 
 const media = (file: string) =>
