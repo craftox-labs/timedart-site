@@ -226,7 +226,7 @@ export type ShowcaseItem = {
   description: string;
   full?: boolean;
   // Optional phone twin — when present the tile shows the desktop shot with
-  // this phone overlapping its corner (side alternates automatically).
+  // this phone overlapping its bottom-right corner.
   phone?: { src: string; alt: string };
 };
 

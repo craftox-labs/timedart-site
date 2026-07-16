@@ -13,13 +13,10 @@ import Phone from "./Phone.astro";
 
         <div class="showcase">
             {
-                showcase.map((item, i) => (
+                showcase.map((item) => (
                     <div class:list={["shot", { "shot-full": item.full }]}>
                         <div
-                            class:list={[
-                                "combo",
-                                { "has-phone": item.phone, left: i % 2 === 1 },
-                            ]}
+                            class:list={["combo", { "has-phone": item.phone }]}
                         >
                             <div class="frame surface-dark desktop">
                                 <img
@@ -86,10 +83,6 @@ import Phone from "./Phone.astro";
         width: 84%;
     }
 
-    .combo.has-phone.left .desktop {
-        margin-left: auto;
-    }
-
     .desktop img {
         width: 100%;
         display: block;
@@ -101,11 +94,6 @@ import Phone from "./Phone.astro";
         right: 0;
         width: clamp(150px, 17vw, 210px);
         z-index: 2;
-    }
-
-    .combo.left .phone-wrap {
-        right: auto;
-        left: 0;
     }
 
     @media (max-width: 640px) {
@@ -133,10 +121,10 @@ import Phone from "./Phone.astro";
             margin: 0;
         }
 
-        .phone-wrap,
-        .combo.left .phone-wrap {
+        .phone-wrap {
             position: static;
-            width: clamp(180px, 52vw, 220px);
+            /* Fill the content column on mobile rather than a capped mockup. */
+            width: 100%;
             margin-top: 0;
         }
     }

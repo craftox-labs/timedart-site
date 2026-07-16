@@ -184,7 +184,8 @@ import Phone from "./Phone.astro";
 
         .hero-shot .phone-wrap {
             position: static;
-            width: clamp(190px, 54vw, 232px);
+            /* Fill the content column on mobile rather than a capped mockup. */
+            width: 100%;
             margin-top: 0;
         }
     }
