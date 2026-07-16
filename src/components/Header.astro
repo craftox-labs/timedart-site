@@ -3,11 +3,17 @@ import { nav, links, site } from "../config/site";
 // Inlined so the wordmark can use currentColor and adapt to the theme
 // (light on dark, dark on light); the greens stay fixed.
 import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
+
+// Active nav item (primary tint). Homepage anchors can't be resolved to a
+// section server-side, so only the section-level items (Docs) light up.
+const path = Astro.url.pathname;
+const isActive = (href: string) =>
+  href.startsWith("/docs") && path.startsWith("/docs");
 ---
 
 <header class="site-header">
     <div class="wrap nav">
-        <a class="brand" href="#top" aria-label={`${site.title} home`}>
+        <a class="brand" href="/" aria-label={`${site.title} home`}>
             <span
                 class="brand-logo"
                 set:html={logoHorizontal}
@@ -15,7 +21,16 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
             />
         </a>
         <nav class="nav-links">
-            {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+            {
+                nav.map((item) => (
+                    <a
+                        href={item.href}
+                        class={isActive(item.href) ? "active" : undefined}
+                    >
+                        {item.label}
+                    </a>
+                ))
+            }
         </nav>
         <div class="nav-right">
             <a
@@ -122,7 +137,8 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
         white-space: nowrap;
     }
 
-    .nav-links a:hover {
+    .nav-links a:hover,
+    .nav-links a.active {
         color: var(--color-accent-text);
     }
 
@@ -213,16 +229,62 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
 </style>
 
 <script>
-    const drawer = document.getElementById("drawer");
-    document
-        .getElementById("menuBtn")
-        ?.addEventListener("click", () => drawer?.classList.add("open"));
-    document
-        .getElementById("drawerClose")
-        ?.addEventListener("click", () => drawer?.classList.remove("open"));
-    drawer
-        ?.querySelectorAll("a")
-        .forEach((a) =>
-            a.addEventListener("click", () => drawer.classList.remove("open")),
+    // Re-wire on every page load — astro:page-load fires on the initial load
+    // and after each view-transition navigation (the DOM is swapped, so the
+    // listeners must be re-attached).
+    function initDrawer() {
+        const drawer = document.getElementById("drawer");
+        document
+            .getElementById("menuBtn")
+            ?.addEventListener("click", () => drawer?.classList.add("open"));
+        document
+            .getElementById("drawerClose")
+            ?.addEventListener("click", () => drawer?.classList.remove("open"));
+        drawer
+            ?.querySelectorAll("a")
+            .forEach((a) =>
+                a.addEventListener("click", () =>
+                    drawer.classList.remove("open"),
+                ),
+            );
+    }
+    document.addEventListener("astro:page-load", initDrawer);
+
+    // Scroll-spy: light the nav item for the homepage section in view. On the
+    // docs pages there are no such sections, so it no-ops and the server-set
+    // "Docs" active state stands.
+    let spy: IntersectionObserver | undefined;
+    function initScrollSpy() {
+        spy?.disconnect();
+        const byId = new Map<string, Element>();
+        for (const a of document.querySelectorAll<HTMLAnchorElement>(
+            '.nav-links a[href*="#"]',
+        )) {
+            const id = (a.getAttribute("href") || "").split("#")[1];
+            if (id) byId.set(id, a);
+        }
+        const sections = [...byId.keys()]
+            .map((id) => document.getElementById(id))
+            .filter((el): el is HTMLElement => el !== null);
+        if (!sections.length) return;
+
+        let current: string | null = null;
+        const setActive = (id: string) => {
+            if (current === id) return;
+            current = id;
+            for (const [sid, a] of byId) a.classList.toggle("active", sid === id);
+        };
+        spy = new IntersectionObserver(
+            (entries) => {
+                for (const e of entries) {
+                    if (e.isIntersecting) setActive(e.target.id);
+                }
+            },
+            // A thin band ~45% down the viewport: whichever section crosses it
+            // is "current".
+            { rootMargin: "-45% 0px -50% 0px" },
         );
+        sections.forEach((s) => spy!.observe(s));
+    }
+    document.addEventListener("astro:page-load", initScrollSpy);
 </script>
