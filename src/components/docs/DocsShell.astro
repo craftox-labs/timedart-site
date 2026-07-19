@@ -23,7 +23,6 @@ const { sections, currentSlug, neighbours } = Astro.props;
         {
             sections.map((section) => (
                 <div class="docs-section">
-                    {section.pages.length > 1 && <h5>{section.group}</h5>}
                     <ul>
                         {section.pages.map((page: DocPage) => (
                             <li>
@@ -106,24 +105,10 @@ const { sections, currentSlug, neighbours } = Astro.props;
         top: calc(var(--header-height) + var(--space-24));
     }
 
-    /* Tight, flat list — single-page sections (no header) read as one menu.
-       A titled (multi-page) group gets its breathing room from the h5's own
-       top margin below. */
+    /* Tight, flat list — every section reads as one uniform menu, no group
+       headers. */
     .docs-section + .docs-section {
         margin-top: var(--space-6);
-    }
-
-    .docs-sidebar h5 {
-        font-size: var(--text-xs-plus);
-        text-transform: uppercase;
-        letter-spacing: var(--tracking-widest-plus);
-        color: var(--color-muted);
-        font-weight: var(--font-weight-normal);
-        margin: var(--space-16) 0 var(--space-10);
-    }
-
-    .docs-section:first-child h5 {
-        margin-top: 0;
     }
 
     .docs-sidebar ul {

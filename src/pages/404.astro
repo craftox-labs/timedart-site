@@ -1,0 +1,215 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { notFound, site } from "../config/site";
+
+// A playful terminal session, echoing the CLI section's structured-error story.
+type Line = { kind: "cmd" | "err" | "out" | "hint"; text: string };
+const session: Line[] = [
+    { kind: "cmd", text: "timedart open " + (Astro.url.pathname || "/page") },
+    { kind: "err", text: "✗ Not found — no entry matches that path. (exit 44)" },
+    { kind: "out", text: "  Nothing was lost. Your time is safe on disk." },
+    { kind: "cmd", text: "timedart where-next" },
+    { kind: "hint", text: "→ Head home, read the docs, or try the live demo." },
+];
+---
+
+<Layout
+    title={`Page not found · ${site.title}`}
+    description="The page you're after doesn't exist or has moved."
+>
+    <Header />
+    <main id="top">
+        <section class="nf section">
+            <div class="wrap">
+                <div class="nf-inner">
+                    <div class="eyebrow">{notFound.eyebrow}</div>
+                    <h1>{notFound.heading}</h1>
+                    <p class="nf-lede">{notFound.lede}</p>
+
+                    <div
+                        class="term surface-dark"
+                        aria-label="A timedart terminal saying the page was not found"
+                    >
+                        <div class="term-bar">
+                            <span class="dot dot-r"></span>
+                            <span class="dot dot-y"></span>
+                            <span class="dot dot-g"></span>
+                            <span class="term-title">timedart — zsh</span>
+                        </div>
+                        <div class="term-body">
+                            {
+                                session.map((line) => (
+                                    <div class:list={["ln", line.kind]}>
+                                        {line.kind === "cmd" && (
+                                            <span class="prompt">$</span>
+                                        )}<span class="txt">{line.text}</span>
+                                    </div>
+                                ))
+                            }
+                        </div>
+                    </div>
+
+                    <div class="nf-cta">
+                        {
+                            notFound.ctas.map((c) => (
+                                <a
+                                    class={`btn ${c.primary ? "btn-primary" : "btn-soft"}`}
+                                    href={c.href}
+                                >
+                                    {c.label}
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <Footer />
+</Layout>
+
+<style>
+    .nf {
+        --font-terminal: var(--font-code);
+        display: flex;
+        align-items: center;
+        /* Fill the viewport between header and footer so the block centres. */
+        min-height: calc(100vh - var(--header-height) - var(--space-64) * 2);
+    }
+
+    .nf-inner {
+        max-width: var(--narrative-max-width, 640px);
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    /* Match the main-page section headings: same font + tight tracking (the
+       base h1 rule sets a much wider tracking, which read as too loose here). */
+    .nf-inner h1 {
+        font-size: var(--text-4xl);
+        letter-spacing: var(--tracking-tight-sm);
+        margin: var(--space-20) 0 0;
+    }
+
+    .nf-lede {
+        color: var(--color-muted);
+        font-size: var(--text-lg);
+        /* Narrower than the terminal so it wraps evenly, no orphan word. */
+        max-width: 34rem;
+        margin: var(--space-20) auto;
+    }
+
+    /* Terminal — same language as the homepage CLI section. */
+    .term {
+        text-align: left;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-bg);
+        overflow: hidden;
+        box-shadow: var(--shadow-lg, 0 20px 60px -20px rgba(0, 0, 0, 0.5));
+    }
+
+    .term-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--space-8);
+        padding: var(--space-10) var(--space-14);
+        background: var(--color-surface);
+        border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .term-bar .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        flex: 0 0 auto;
+    }
+    .dot-r {
+        background: var(--color-dot-red);
+    }
+    .dot-y {
+        background: var(--color-dot-yellow);
+    }
+    .dot-g {
+        background: var(--color-accent);
+    }
+
+    .term-title {
+        margin-left: var(--space-8);
+        font-family: var(--font-terminal);
+        font-size: var(--text-xs-plus);
+        color: var(--color-muted);
+    }
+
+    .term-body {
+        padding: var(--space-18) var(--space-20);
+        font-family: var(--font-terminal);
+        font-size: var(--text-sm-plus);
+        line-height: 1.65;
+        overflow-x: auto;
+    }
+
+    .term-body .cmd:not(:first-child) {
+        margin-top: var(--space-14);
+    }
+
+    .term-body .txt {
+        white-space: pre;
+    }
+    .term-body .prompt {
+        color: var(--color-accent-text);
+        margin-right: var(--space-10);
+        user-select: none;
+    }
+    .term-body .cmd .txt {
+        color: var(--color-text);
+    }
+    .term-body .err .txt {
+        color: var(--color-dot-red);
+    }
+    .term-body .out .txt {
+        color: var(--color-muted);
+    }
+    .term-body .hint .txt {
+        color: var(--color-accent-text);
+    }
+
+    .nf-cta {
+        margin-top: var(--space-20);
+        display: flex;
+        justify-content: center;
+        gap: var(--space-12);
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 520px) {
+        .nf-inner h1 {
+            font-size: var(--text-3xl);
+        }
+
+        .term-body,
+        .term-bar {
+            padding-left: var(--space-14);
+            padding-right: var(--space-14);
+        }
+
+        .term-body {
+            font-size: var(--text-xs);
+            line-height: 1.7;
+        }
+
+        /* Wrap long lines with a hanging indent instead of scrolling sideways —
+           a phone-width terminal reads far better wrapped than clipped. */
+        .term-body .ln {
+            display: flex;
+        }
+
+        .term-body .txt {
+            white-space: pre-wrap;
+            overflow-wrap: anywhere;
+            min-width: 0;
+        }
+    }
+</style>

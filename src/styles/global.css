@@ -350,13 +350,21 @@ kbd.accent {
     background: var(--color-surface-2);
 }
 
+/* Code blocks match the homepage terminal/snippets: darker bg, real monospace,
+   flat border on the button radius. */
 .docs-prose pre {
-    background: var(--color-surface-2);
+    background: var(--color-bg);
     border: var(--border-width) solid var(--color-border);
     border-radius: var(--radius-md);
-    padding: var(--space-16);
+    padding: var(--space-16) var(--space-18);
     overflow-x: auto;
     margin: var(--space-16) 0;
+    line-height: 1.65;
+}
+
+.docs-prose pre code {
+    font-family: var(--font-code);
+    color: var(--color-text);
 }
 
 .docs-prose code {

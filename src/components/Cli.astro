@@ -1,0 +1,203 @@
+---
+import { cliSection, cliTerminal, cliFeatures } from "../config/site";
+---
+
+<section class="cli section" id="cli">
+    <div class="wrap">
+        <div class="section-head">
+            <div class="eyebrow">{cliSection.eyebrow}</div>
+            <h2 set:html={cliSection.heading} />
+            <p set:html={cliSection.lede} />
+        </div>
+
+        <div class="term surface-dark" aria-label="Example timedart CLI session">
+            <div class="term-bar">
+                <span class="dot dot-r"></span>
+                <span class="dot dot-y"></span>
+                <span class="dot dot-g"></span>
+                <span class="term-title">timedart — zsh</span>
+            </div>
+            <div class="term-body">
+                {cliTerminal.map((line) => (
+                    <div class:list={["ln", line.kind]}>
+                        {line.kind === "cmd" && <span class="prompt">$</span>}<span class="txt">{line.text}</span>
+                    </div>
+                ))}
+            </div>
+        </div>
+
+        <div class="cli-features">
+            {
+                cliFeatures.map((f) => (
+                    <div class="cli-card surface-dark">
+                        <h3>{f.title}</h3>
+                        <p>{f.description}</p>
+                        {f.snippet && <pre class="snippet">{f.snippet}</pre>}
+                    </div>
+                ))
+            }
+        </div>
+
+        <div class="cli-cta">
+            <a class="btn btn-primary" href={cliSection.ctaPrimary.href}
+                >{cliSection.ctaPrimary.label}</a
+            >
+            <a class="btn btn-soft" href={cliSection.ctaSecondary.href}
+                >{cliSection.ctaSecondary.label}</a
+            >
+        </div>
+    </div>
+</section>
+
+<style>
+    /* System monospace, scoped here only — the site's --font-mono is Outfit by
+       design, but a terminal mockup needs to read as a real terminal. */
+    .cli {
+        --font-terminal: var(--font-code);
+        border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .term {
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-bg);
+        overflow: hidden;
+    }
+
+    .term-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--space-8);
+        padding: var(--space-10) var(--space-14);
+        background: var(--color-surface);
+        border-bottom: var(--border-width) solid var(--color-border);
+    }
+
+    .term-bar .dot {
+        width: 11px;
+        height: 11px;
+        border-radius: 50%;
+        flex: 0 0 auto;
+    }
+
+    .dot-r {
+        background: var(--color-dot-red);
+    }
+    .dot-y {
+        background: var(--color-dot-yellow);
+    }
+    .dot-g {
+        background: var(--color-accent);
+    }
+
+    .term-title {
+        margin-left: var(--space-8);
+        font-family: var(--font-terminal);
+        font-size: var(--text-xs-plus);
+        color: var(--color-muted);
+    }
+
+    .term-body {
+        margin: 0;
+        padding: var(--space-18) var(--space-20);
+        font-family: var(--font-terminal);
+        font-size: var(--text-sm-plus);
+        line-height: 1.65;
+        overflow-x: auto;
+    }
+
+    /* Blank-ish gap between a command and the block it belongs to reads as a
+       natural prompt rhythm without literal empty lines. */
+    .term-body .cmd:not(:first-child) {
+        margin-top: var(--space-14);
+    }
+
+    /* Preserve intentional internal spacing (indent, column alignment) only —
+       the element boundaries handle line breaks, so no source whitespace leaks. */
+    .term-body .txt {
+        white-space: pre;
+    }
+
+    .term-body .cmd .txt {
+        color: var(--color-text);
+    }
+
+    .term-body .out .txt {
+        color: var(--color-muted);
+    }
+
+    .term-body .prompt {
+        color: var(--color-accent-text);
+        margin-right: var(--space-10);
+        user-select: none;
+    }
+
+    .cli-features {
+        display: grid;
+        /* minmax(0,…) lets a track shrink below its content so the snippet's
+           overflow-x scrolls internally instead of widening the page. */
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        gap: var(--space-20);
+        margin-top: var(--space-36);
+    }
+
+    .cli-card {
+        min-width: 0;
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-md);
+        background: var(--color-surface);
+        padding: var(--space-24) var(--space-28);
+    }
+
+    .cli-card h3 {
+        font-size: var(--text-lg-plus);
+        margin: 0 0 var(--space-10);
+    }
+
+    .cli-card p {
+        color: var(--color-muted);
+        font-size: var(--text-base-minus);
+        margin: 0;
+    }
+
+    .cli-card .snippet {
+        margin: var(--space-16) 0 0;
+        padding: var(--space-14) var(--space-16);
+        background: var(--color-bg);
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-sm, 5px);
+        font-family: var(--font-terminal);
+        font-size: var(--text-xs-plus);
+        line-height: 1.7;
+        color: var(--color-accent-text);
+        max-width: 100%;
+        overflow-x: auto;
+    }
+
+    .cli-cta {
+        margin-top: var(--space-36);
+        display: flex;
+        justify-content: center;
+        gap: var(--space-12);
+        flex-wrap: wrap;
+    }
+
+    @media (max-width: 720px) {
+        .cli-features {
+            grid-template-columns: minmax(0, 1fr);
+        }
+    }
+
+    @media (max-width: 520px) {
+        .term-body,
+        .cli-card .snippet {
+            font-size: var(--text-xs-plus);
+        }
+
+        .term-body,
+        .term-bar {
+            padding-left: var(--space-14);
+            padding-right: var(--space-14);
+        }
+    }
+</style>
