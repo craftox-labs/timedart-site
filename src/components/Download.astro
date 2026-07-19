@@ -31,6 +31,23 @@ import { downloadSection as d } from "../config/site";
             }
         </div>
 
+        <div class="cli-strip surface-dark">
+            <div class="cli-strip-text">
+                <h3>{d.cli.heading}</h3>
+                <p>{d.cli.lede}</p>
+            </div>
+            <div class="cli-strip-actions">
+                {
+                    d.cli.downloads.map((x) => (
+                        <a class="btn btn-soft" href={x.href}>
+                            {x.os}
+                        </a>
+                    ))
+                }
+                <a class="btn btn-primary" href={d.cli.docsHref}>Guide</a>
+            </div>
+        </div>
+
         <p class="dl-foot">
             {d.note} All builds & checksums on the <a href={d.allReleasesHref}
                 >releases page</a
@@ -73,6 +90,37 @@ import { downloadSection as d } from "../config/site";
         font-size: var(--text-base-minus);
         text-align: center;
         margin-top: auto;
+    }
+
+    /* Slim CLI row under the platform cards — the CLI is a companion tool,
+       not a fifth platform, so it reads as an addendum, not a peer card. */
+    .cli-strip {
+        margin-top: var(--space-20);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-24);
+        flex-wrap: wrap;
+        background: var(--color-surface);
+        border: var(--border-width) solid var(--color-border);
+        border-radius: var(--radius-md);
+        padding: var(--space-20) var(--space-24);
+    }
+
+    .cli-strip-text h3 {
+        font-size: var(--text-lg);
+    }
+
+    .cli-strip-text p {
+        color: var(--color-muted);
+        font-size: var(--text-base-minus);
+        margin-top: var(--space-4);
+    }
+
+    .cli-strip-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-9);
     }
 
     .dl-foot {

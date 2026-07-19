@@ -60,6 +60,10 @@
     --font-mono: "Outfit", system-ui, -apple-system, sans-serif;
     /*--font-mono:
         "JetBrains Mono Variable", "JetBrains Mono", ui-monospace, monospace;*/
+    /* Real monospace — for code blocks & the CLI terminal only, where Outfit
+       would read wrong. Deliberately NOT --font-mono (kept Outfit by design). */
+    --font-code: ui-monospace, "JetBrains Mono", "SF Mono", "Menlo",
+        "Consolas", monospace;
     --font-heading: "Raleway Variable", Georgia, serif;
     --font-heading-weight: 600; /* Raleway Medium */
     --font-heading-style: italic;

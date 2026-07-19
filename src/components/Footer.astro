@@ -13,7 +13,7 @@ import logoHorizontal from "../assets/timedart-logo-horizontal.svg?raw";
                     role="img"
                     aria-label={site.title}
                 />
-                <p>{footer.brandDescription}</p>
+                <p set:html={footer.brandDescription} />
             </div>
             <div class="foot-cols">
                 {

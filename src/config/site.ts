@@ -22,6 +22,7 @@ export const links = {
   githubAllProjects: "https://github.com/craftox-labs",
   craftox: "https://craftox-labs.github.io",
   desktopDownload: "#download", // in-page download section
+  cliDocs: "/docs/cli",
 };
 
 // Download links resolve to whatever is the *latest* GitHub release — no need to
@@ -79,6 +80,29 @@ export const downloadSection = {
       note: "Allow install from unknown sources.",
     },
   ],
+  // The companion command-line tool ships as its own archive per platform,
+  // rendered as a slim strip under the app cards (see Download.astro).
+  cli: {
+    heading: "Command-line tool",
+    lede: "A terminal companion on the same database - and the docs to drive it.",
+    docsHref: links.cliDocs,
+    downloads: [
+      { os: "Linux", href: dlAsset("timedart-cli-linux-x86_64.tar.gz") },
+      { os: "macOS", href: dlAsset("timedart-cli-macos-arm64.zip") },
+      { os: "Windows", href: dlAsset("timedart-cli-windows-x64.zip") },
+    ],
+  },
+};
+
+export const notFound = {
+  eyebrow: "Error 404",
+  heading: "This page clocked out.",
+  lede: "The page you're after doesn't exist, moved, or was never tracked - no time lost.",
+  ctas: [
+    { label: "Back home", href: "/", primary: true },
+    { label: "Read the docs", href: "/docs/getting-started" },
+    { label: "Try the demo", href: links.demo },
+  ],
 };
 
 // Homepage sections are linked absolutely (`/#…`) so the nav works from the
@@ -89,7 +113,7 @@ export const nav = [
   { label: "Features", href: "/#features" },
   { label: "Screens", href: "/#screenshots" },
   { label: "Keyboard", href: "/#keyboard" },
-  { label: "Under the hood", href: "/#hood" },
+  { label: "CLI", href: "/#cli" },
   { label: "Download", href: "/#download" },
   // Point at the first page directly (not the /docs meta-refresh redirect,
   // which is a hard load that bypasses view transitions and flashes).
@@ -325,6 +349,46 @@ export const keyRows: KeyRow[] = [
   },
 ];
 
+export const cliSection = {
+  eyebrow: "Also drivable from your terminal",
+  heading: "A companion CLI - and it's built for agents too.",
+  lede: "The <code>timedart</code> command-line tool is a peer of the app on the same local database - start a timer, log past work or pull a report without leaving the shell. A timer you start here shows up in the open app within a second.",
+  ctaPrimary: { label: "Read the CLI guide", href: links.cliDocs },
+  ctaSecondary: { label: "Get the CLI", href: links.desktopDownload },
+};
+
+// Illustrative terminal session — every command and output line is taken
+// verbatim from the CLI docs (docs/content/cli.md), so it stays truthful.
+export type TermLine = { kind: "cmd" | "out" | "comment"; text: string };
+
+export const cliTerminal: TermLine[] = [
+  { kind: "cmd", text: 'timedart timer start -p "Acme Website" -t Design -d "hero section"' },
+  { kind: "cmd", text: "timedart timer status" },
+  { kind: "out", text: "Running — ACME Acme Website / Design" },
+  { kind: "out", text: "  hero section" },
+  { kind: "out", text: "  Elapsed: 1m 5s" },
+  { kind: "cmd", text: "timedart report --since 2026-07-01" },
+  { kind: "out", text: "ACME Acme Website   6h 30m   5 entries   $780.00" },
+  { kind: "out", text: "TOTAL               6h 30m   5 entries   $780.00" },
+];
+
+export type CliFeature = { title: string; description: string; snippet?: string };
+
+export const cliFeatures: CliFeature[] = [
+  {
+    title: "The same work, in the shell",
+    description:
+      "Track, pause, log past work, manage clients → projects → tasks, and total up reports - the same actions the app offers, on the same database. Short flags keep it terse: -p project, -t task, -D duration.",
+    snippet: "timedart --version   # confirm it's installed\ntimedart --help      # then browse every command",
+  },
+  {
+    title: "Agent-ready by design",
+    description:
+      "The binary carries its own instructions, so an AI agent learns the whole tool from the command itself. Add --json to anything for machine-readable output, and every command returns a meaningful exit code.",
+    snippet: "timedart guide       # full usage guide, written for agents\ntimedart help --json  # every command & exit code, as JSON",
+  },
+];
+
 export const narrative = {
   eyebrow: "Built for people who bill by the hour",
   quotePre:
@@ -377,7 +441,7 @@ export type FooterGroup = { heading: string; links: FooterLink[] };
 
 export const footer = {
   brandDescription:
-    "Fast, local-first time tracking & invoicing for people who bill by the hour. A product by craftox.",
+    "Fast, local-first time tracking & invoicing for people who bill by the hour.<br>A product by craftox.",
   bottomLeft: "© 2026 craftox - focused solutions.",
   bottomRight: "MIT licensed · built with Flutter & drift",
   groups: [
@@ -388,6 +452,7 @@ export const footer = {
         { label: "Live demo", href: links.demo },
         { label: "Features", href: "#features" },
         { label: "Keyboard", href: "#keyboard" },
+        { label: "CLI", href: links.cliDocs },
       ],
     },
     {
